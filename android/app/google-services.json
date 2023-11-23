@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581553400743",
+    "project_id": "wfms-c15a1",
+    "storage_bucket": "wfms-c15a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581553400743:android:c630ae22fbac5a304b6482",
+        "android_client_info": {
+          "package_name": "com.example.wfms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjoFckRGI-1chQWPaSsTREM_BcEIqMQyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
