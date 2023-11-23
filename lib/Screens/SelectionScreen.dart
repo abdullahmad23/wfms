@@ -37,10 +37,10 @@ class SelectionScreen extends StatelessWidget {
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ImgButton('organization', 'assets/Organization.png', (){}),
+            ImgButton('Organization', 'assets/Organization.png', (){}),
             ImgButton('Client', 'assets/User.png', (){}),
           ],
-            ),SizedBox(height: 30,),
+            ),SizedBox(height: 20,),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ImgButton('Hotel', 'assets/ServiceBell.png', (){}),
