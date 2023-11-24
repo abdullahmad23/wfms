@@ -18,13 +18,13 @@ class AdminMain extends StatefulWidget {
 
 class _AdminMainState extends State<AdminMain> {
   int _page = 0;
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   final pageIndex = [
-    AdminApplicationStats(),
-    AdminHome(),
-    AdminProfile(),
-    AdminRequestManagment(),
+    const AdminApplicationStats(),
+    const AdminHome(),
+    const AdminProfile(),
+    const AdminRequestManagment(),
   ];
 
   @override
@@ -49,32 +49,33 @@ class _AdminMainState extends State<AdminMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: _page,
-          height: 60.0,
-          items: <Widget>[
-            Icon(Icons.add, size: 30),
-            Icon(Icons.list, size: 30),
-            Icon(Icons.compare_arrows, size: 30),
-            Icon(Icons.call_split, size: 30),
-            Icon(Icons.perm_identity, size: 30),
-          ],
-          color: Colors.white,
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: Colors.blueAccent,
-          animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 600),
-          onTap: (index) {
-            setState(() {
-              _page = index;
-            });
-          },
-          letIndexChange: (index) => true,
-        ),
-        body: pageIndex[_page],
-
-            );
-
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        index: _page,
+        height: 60.0,
+        items: const <Widget>[
+          Icon(
+            Icons.add,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(Icons.list, size: 30, color: Colors.white),
+          Icon(Icons.compare_arrows, size: 30, color: Colors.white),
+          Icon(Icons.call_split, size: 30, color: Colors.white),
+        ],
+        color: const Color(0xff1b2e0d),
+        buttonBackgroundColor: const Color(0xff7FBD50),
+        backgroundColor: const Color.fromARGB(255, 250, 250, 250),
+        animationCurve: Curves.decelerate,
+        animationDuration: const Duration(milliseconds: 600),
+        onTap: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
+        letIndexChange: (index) => true,
+      ),
+      body: pageIndex[_page],
+    );
   }
 }
