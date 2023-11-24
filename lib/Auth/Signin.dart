@@ -62,24 +62,33 @@ class _SignInState extends State<SignIn> {
           }
           break;
       }
+    } else {
+      const SnackBar(content: Text('Not Authorized  '));
     }
   }
 
   HandleSignIn() async {
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-      email: _EmailController.text,
-      password: _PassWordController.text,
-    )
-        .then((user) {
-      FirebaseFirestore.instance
-          .collection("users")
-          .doc(user.user!.uid)
-          .get()
-          .then((value) => {NavigateUser(value.data()?['type'])});
-    });
-    print(_EmailController.text);
-    print(_PassWordController.text);
+    EasyLoading.show(status: 'Please wait...');
+
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: _EmailController.text,
+        password: _PassWordController.text,
+      )
+          .then((user) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.user!.uid)
+            .get()
+            .then((value) => {NavigateUser(value.data()?['type'])});
+      });
+    } on FirebaseAuthException catch (e) {
+      EasyLoading.showError(e.code);
+    } catch (e) {
+      EasyLoading.showError(e.toString());
+    }
+    EasyLoading.dismiss();
   }
 
   HandleSignUp() async {
@@ -98,6 +107,7 @@ class _SignInState extends State<SignIn> {
           "email": _EmailController.text,
           "phone": _PhNumController.text,
           "type": widget.title,
+          "varified": false,
         };
         FirebaseFirestore.instance
             .collection("users")
