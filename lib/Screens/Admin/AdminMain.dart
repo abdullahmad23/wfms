@@ -32,8 +32,6 @@ class _AdminMainState extends State<AdminMain> {
 
   @override
   Widget build(BuildContext context) {
-    NavigateToverification() {}
-
     return const Placeholder();
   }
 }
