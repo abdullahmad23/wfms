@@ -8,10 +8,14 @@ class ImgButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed(),
-      child: Container(padding: EdgeInsets.all(0),height: 120,width: 120,
+      onTap: () {
+        onPressed();
+      },
+      child: Container(
+        padding: const EdgeInsets.all(0),
+        height: 120,
+        width: 120,
         decoration: BoxDecoration(
-        
             border: Border.all(
               color: Colors.black,
             ),
@@ -20,7 +24,7 @@ class ImgButton extends StatelessWidget {
           children: [
             Image.asset(img),
             Text(name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
                 )),
