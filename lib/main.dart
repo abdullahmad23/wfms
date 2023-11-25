@@ -4,6 +4,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:waste/Screens/SelectionScreen.dart';
 import 'package:waste/firebase_options.dart';
 
+import 'Screens/Client/ClientHome.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -32,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         const Duration(seconds: 3),
         () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SelectionScreen()),
+              MaterialPageRoute(builder: (context) => const ClientHome()/*SelectionScreen()*/),
             ));
   }
 
