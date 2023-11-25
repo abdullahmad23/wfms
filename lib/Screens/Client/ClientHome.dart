@@ -20,68 +20,16 @@ class _ClientHomeState extends State<ClientHome> {
             width: double.infinity,
           ),
           AppLogo(),
-          SizedBox(
-            height: 8.0,
-          ),
+          SizedBox(height: 8.0,),
           searchBar(),
-
-          SizedBox(
-            height: 8.0,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(),
-            ),
-            child: Row(
-
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Biryani',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      'KasraNoor Shadi Hall',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff7fbd50),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Text('Bajna Moterway Road \nShinkiari', style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff4a4951),),),
-
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Text('Quantity ',style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff7fbd50)),),
-                          Text('50 kg'),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                  ],
-                ),
-              ],
-            ),
-          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(children: [
+              foodcontainer(),
+              foodcontainer(),
+       
+            ]),
+          )
         ]),
       ),
     );
@@ -116,4 +64,82 @@ class _ClientHomeState extends State<ClientHome> {
           ]),
     );
   }
+}
+
+Widget foodcontainer() {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    margin: EdgeInsets.only(top: 15),
+    decoration: BoxDecoration(
+        border: Border.all(), borderRadius: BorderRadius.circular(18)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Biryani',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black),
+            ),
+            Text(
+              'KasraNoor Shadi Hall',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff7fbd50),
+              ),
+            ),
+            SizedBox(height: 8.0,),
+            Text(
+              'Bajna Moterway Road \nShinkiari',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff4a4951),
+              ),
+            ),
+            SizedBox(height: 8.0,),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Quantity ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff7fbd50)),
+                    ),
+                    Text('  50 kg'),
+                  ],
+                ),
+                SizedBox(
+                  width: 50,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'New',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff7fbd50)),
+                    ),
+                    Text('PKR 90/kg'),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(child: Image.asset("assets/Mask group.png"))
+      ],
+    ),
+  );
 }
