@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         const Duration(seconds: 3),
         () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SelectionScreen()),
+              MaterialPageRoute(builder: (context) => const SelectionScreen(),),
             ));
   }
 
