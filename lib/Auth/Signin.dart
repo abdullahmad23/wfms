@@ -109,6 +109,7 @@ class _SignInState extends State<SignIn> {
           "phone": _PhNumController.text,
           "type": widget.title,
           "varified": false,
+          "img":'https://firebasestorage.googleapis.com/v0/b/wfms-c15a1.appspot.com/o/ertyu.png?alt=media&token=e29ea5fb-f048-4364-a713-4ac33fc88d8b'
         };
         FirebaseFirestore.instance
             .collection("users")
