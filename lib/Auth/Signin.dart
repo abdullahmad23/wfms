@@ -20,7 +20,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isSignInPage = true;
-  bool ischangecolor =false;
+  bool ischangecolor =true;
   final TextEditingController _FNameController = TextEditingController();
   final TextEditingController _LNameController = TextEditingController();
   final TextEditingController _PhNumController = TextEditingController();
@@ -183,7 +183,7 @@ class _SignInState extends State<SignIn> {
                             });
                           },
                           child: 
-                      Text('LOGIN',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.white:Colors.grey),),
+                      Text('LOGIN',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.white:Colors.grey),),
 
                         ),
                         // go to sign up
@@ -197,7 +197,7 @@ class _SignInState extends State<SignIn> {
                             });
                           },
                           child: 
-                      Text('SIGN UP',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.white:Colors.grey),),
+                      Text('SIGN UP',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.grey:Colors.white),),
 
                         ),
                       ],
@@ -279,92 +279,99 @@ class _SignInState extends State<SignIn> {
               // if Signin is False
               Visibility(
                 visible: !isSignInPage,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  
-                  children: [
-                      Text('Client',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily),),
-                      SizedBox(height: 10,),
-                      Row(
-                        children: [
-                          Text('First Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    
+                    children: [
+                        Text('Client',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily),),
+                        SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Text('First Name',style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700),),
+                          ],
+                        ),
+                
+                      TextField(
+                        controller: _FNameController,
+                        decoration: const InputDecoration(
+                          
+                          hintText: 'Enter your First Name ',
+                          hintStyle: TextStyle(fontSize: 12),
+                
+                        ),
                       ),
-
-                    TextField(
-                      controller: _FNameController,
-                      decoration: const InputDecoration(
+                        Row(
+                          children: [
+                            Text('Last Name',style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700),),
+                          ],
+                        ),
+                
+                      TextField(
+                        controller: _LNameController,
+                        decoration: const InputDecoration(
                         
-                        hintText: 'Enter your Phone Number ',
-
+                          hintText: 'Enter your Last Name ',
+                           hintStyle: TextStyle(fontSize: 12),
+                
+                        ),
                       ),
+                        Row(
+                          children: [
+                            Text('Email',style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700),),
+                          ],
+                        ),
+                
+                      TextField(
+                        controller: _EmailController,
+                        decoration: const InputDecoration(
+                         
+                          hintText: 'Enter your Email ',
+                           hintStyle: TextStyle(fontSize: 12),
+                
+                        ),
+                      ),
+                        Row(
+                          children: [
+                            Text('Password',style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700),),
+                          ],
+                        ),
+                
+                      TextField(
+                        controller: _PassWordController,
+                        decoration: const InputDecoration(
+                         
+                          hintText: 'Enter your password ',
+                           hintStyle: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                        Row(
+                          children: [
+                            Text('Phone Number',style: TextStyle(fontSize: 17,fontWeight: FontWeight.w700),),
+                          ],
+                        ),
+                
+                      TextField(
+                        controller: _PhNumController,
+                        decoration: const InputDecoration(
+                         
+                          hintText: 'Enter your Phone Number ',
+                           hintStyle: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(shape:  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32), // <-- Radius
                     ),
-                      Row(
-                        children: [
-                          Text('Last Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                        ],
+                                backgroundColor: Color(0Xff1B2E0D), elevation: 0,minimumSize:Size(330 , 50)),
+                        onPressed: HandleSignUp,
+                        
+                        child: Text('SIGN UP',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,),),
                       ),
-
-                    TextField(
-                      controller: _LNameController,
-                      decoration: const InputDecoration(
-                      
-                        hintText: 'Enter your Phone Number ',
-
-                      ),
-                    ),
-                      Row(
-                        children: [
-                          Text('Email',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                        ],
-                      ),
-
-                    TextField(
-                      controller: _EmailController,
-                      decoration: const InputDecoration(
-                       
-                        hintText: 'Enter your Phone Number ',
-
-                      ),
-                    ),
-                      Row(
-                        children: [
-                          Text('Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                        ],
-                      ),
-
-                    TextField(
-                      controller: _PassWordController,
-                      decoration: const InputDecoration(
-                       
-                        hintText: 'Enter your Phone Number ',
-
-                      ),
-                    ),
-                      Row(
-                        children: [
-                          Text('Phone Number',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                        ],
-                      ),
-
-                    TextField(
-                      controller: _PhNumController,
-                      decoration: const InputDecoration(
-                       
-                        hintText: 'Enter your Phone Number ',
-                      ),
-                    ),
-                    SizedBox(height: 20,),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape:  RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(32), // <-- Radius
-    ),
-                              backgroundColor: Color(0Xff1B2E0D), elevation: 0,minimumSize:Size(330 , 60)),
-                      onPressed: HandleSignUp,
-                      
-                      child: Text('SIGN UP',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,),),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
