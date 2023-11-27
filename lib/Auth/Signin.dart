@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,8 +6,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:waste/Screens/Admin/AdminMain.dart';
 import 'package:waste/Screens/Client/ClientMain.dart';
 import 'package:waste/Screens/Hotel/HotelMain.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../Screens/Organization/OrganizationMain.dart';
+
 
 class SignIn extends StatefulWidget {
   final String title;
@@ -20,6 +20,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isSignInPage = true;
+  bool ischangecolor =false;
   final TextEditingController _FNameController = TextEditingController();
   final TextEditingController _LNameController = TextEditingController();
   final TextEditingController _PhNumController = TextEditingController();
@@ -137,101 +138,237 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: [
-          Row(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
             children: [
-              // Got To LOgin
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    isSignInPage = true;
-                  });
-                },
-                child: const Text('sign in'),
+              Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: Colors.grey,
+                    size: 20,
+                  ),
+                  SizedBox(
+                    height: 55,
+                    width: MediaQuery.of(context).size.width - 40,
+                    child: Image.asset("assets/AppBarLogo.png"),
+                  ),
+                ],
               ),
-              // go to sign up
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    isSignInPage = false;
-                  });
-                },
-                child: const Text('sign up'),
+              SizedBox(
+                height: 40,
+              ),
+              Stack(
+                children: [
+                  Container(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20)),
+                        color: Color(0Xff1B2E0D)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // Got To LOgin
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0Xff1B2E0D), elevation: 0),
+                          onPressed: () {
+                            setState(() {
+                              isSignInPage = true;
+                            });
+                          },
+                          child: 
+                      Text('LOGIN',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.white:Colors.grey),),
+
+                        ),
+                        // go to sign up
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0Xff1B2E0D), elevation: 0),
+                          onPressed: () {
+                            
+                            setState(() {
+                              isSignInPage = false;
+                            });
+                          },
+                          child: 
+                      Text('SIGN UP',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,color: ischangecolor?Colors.white:Colors.grey),),
+
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20)),
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        width: MediaQuery.of(context).size.width,
+                        height: 20,
+                        
+                      ))
+                ],
+              ),
+              // if Signin Is Enabled
+
+              Visibility(
+                visible: isSignInPage,
+                child: Container(
+                  height: 6000,
+                  width: MediaQuery.of(context).size.width,
+                
+                  child: Column(
+                    children: [
+                      Text('Client',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                      SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          Text('Email',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                      TextField(
+                        controller: _EmailController,
+                        decoration: const InputDecoration(
+                        
+                          hintText: "Enter your Email"
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          Text('Password',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                      TextField(
+                        controller: _PassWordController,
+                        decoration: const InputDecoration(
+                         
+                          hintText: "Enter your Password",
+                          suffix: Icon(Icons.visibility_off_rounded,color: Colors.grey,size: 20,),
+                        ),
+                      ),
+                      SizedBox(height: 20,),
+                      // Row(mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     Text('Forgot Password?'),
+                      //   ],
+                      // ),
+                      SizedBox(height: 20,),
+
+                      ElevatedButton(style: ElevatedButton.styleFrom(shape:  RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(32), // <-- Radius
+    ),
+                              backgroundColor: Color(0Xff1B2E0D), elevation: 0,minimumSize:Size(330 , 60)),
+                        onPressed: HandleSignIn,
+                        child: Text('LOGIN',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily),),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // if Signin is False
+              Visibility(
+                visible: !isSignInPage,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  
+                  children: [
+                      Text('Client',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily),),
+                      SizedBox(height: 10,),
+                      Row(
+                        children: [
+                          Text('First Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                    TextField(
+                      controller: _FNameController,
+                      decoration: const InputDecoration(
+                        
+                        hintText: 'Enter your Phone Number ',
+
+                      ),
+                    ),
+                      Row(
+                        children: [
+                          Text('Last Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                    TextField(
+                      controller: _LNameController,
+                      decoration: const InputDecoration(
+                      
+                        hintText: 'Enter your Phone Number ',
+
+                      ),
+                    ),
+                      Row(
+                        children: [
+                          Text('Email',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                    TextField(
+                      controller: _EmailController,
+                      decoration: const InputDecoration(
+                       
+                        hintText: 'Enter your Phone Number ',
+
+                      ),
+                    ),
+                      Row(
+                        children: [
+                          Text('Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                    TextField(
+                      controller: _PassWordController,
+                      decoration: const InputDecoration(
+                       
+                        hintText: 'Enter your Phone Number ',
+
+                      ),
+                    ),
+                      Row(
+                        children: [
+                          Text('Phone Number',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+
+                    TextField(
+                      controller: _PhNumController,
+                      decoration: const InputDecoration(
+                       
+                        hintText: 'Enter your Phone Number ',
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(shape:  RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(32), // <-- Radius
+    ),
+                              backgroundColor: Color(0Xff1B2E0D), elevation: 0,minimumSize:Size(330 , 60)),
+                      onPressed: HandleSignUp,
+                      
+                      child: Text('SIGN UP',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,fontFamily:GoogleFonts.inter().fontFamily,),),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          // if Signin Is Enabled
-
-          Visibility(
-            visible: isSignInPage,
-            child: Column(
-              children: [
-                TextField(
-                  controller: _EmailController,
-                  decoration: const InputDecoration(
-                    label: Text('Email'),
-                  ),
-                ),
-                TextField(
-                  controller: _PassWordController,
-                  decoration: const InputDecoration(
-                    label: Text('Email'),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: HandleSignIn,
-                  child: const Text('signin'),
-                ),
-              ],
-            ),
-          ),
-          // if Signin is False
-          Visibility(
-            visible: !isSignInPage,
-            child: Column(
-              children: [
-                TextField(
-                  controller: _FNameController,
-                  decoration: const InputDecoration(
-                    label: Text('F'),
-                  ),
-                ),
-                TextField(
-                  controller: _LNameController,
-                  decoration: const InputDecoration(
-                    label: Text('l'),
-                  ),
-                ),
-                TextField(
-                  controller: _EmailController,
-                  decoration: const InputDecoration(
-                    label: Text('Email'),
-                  ),
-                ),
-                TextField(
-                  controller: _PassWordController,
-                  decoration: const InputDecoration(
-                    label: Text('Pass'),
-                  ),
-                ),
-                TextField(
-                  controller: _PhNumController,
-                  decoration: const InputDecoration(
-                    label: Text('Phnum'),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: HandleSignUp,
-                  child: const Text('signin'),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
