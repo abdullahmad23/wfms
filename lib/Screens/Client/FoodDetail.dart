@@ -9,7 +9,7 @@ class FoodDetail extends StatefulWidget {
 
 class _FoodDetailState extends State<FoodDetail> {
   Map FoodDetails = {
-    'name': 'Biyani',
+    'foodname': 'Biyani',
   };
 
   ShowOfferModel() {
@@ -25,7 +25,7 @@ class _FoodDetailState extends State<FoodDetail> {
           height: MediaQuery.of(context).size.height * 0.5,
           child: Column(
             children: [
-              Text("${FoodDetails['name']}",
+              Text("${FoodDetails['foodname']}",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w500,
@@ -33,6 +33,7 @@ class _FoodDetailState extends State<FoodDetail> {
               Divider(
                 color: Colors.black,
               ),
+              SizedBox(height: 20,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,6 +43,7 @@ class _FoodDetailState extends State<FoodDetail> {
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       )),
+                      SizedBox(height: 15,),
                   TextField(
                     decoration: InputDecoration(
                       hintText: 'Enter your quantity',
@@ -55,11 +57,13 @@ class _FoodDetailState extends State<FoodDetail> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 20,),
                   Text("Price",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       )),
+                      SizedBox(height: 15,),
                   TextField(
                     decoration: InputDecoration(
                       hintText: 'Enter your Price',
@@ -73,6 +77,7 @@ class _FoodDetailState extends State<FoodDetail> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 100,),
                   ElevatedButton(
                       style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(
@@ -134,7 +139,7 @@ class _FoodDetailState extends State<FoodDetail> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${FoodDetails['name']}",
+                    Text("${FoodDetails['foodname']}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
