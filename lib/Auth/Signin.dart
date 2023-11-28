@@ -409,7 +409,7 @@ class _SignInState extends State<SignIn> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "field can't be empty";
+                                return "Email can't be empty";
                               } else if (!RegExp(
                                       "^[a-zA-Z0-9.a-zA-Z0-9.!#%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]+")
                                   .hasMatch(value)) {
