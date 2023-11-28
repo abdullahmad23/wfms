@@ -114,8 +114,12 @@ class _FoodDetailState extends State<FoodDetail> {
                     ),
                     context: context, builder: (context){return Container(height: MediaQuery.of(context).size.height*0.5,
                   decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
-                  color: Colors.amber),
-                  );},);
+                 ),
+                 child: Column(children: [
+                  Text("data")
+                 ],),
+                  );
+                  },);
                 }, child: Text(
                     "Send Offer",
                       style: TextStyle(
