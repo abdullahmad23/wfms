@@ -50,7 +50,7 @@ Widget hallcontainer(){
               ),
               SizedBox(height: 8.0,),
               Text(
-                'Karakoeam Highway \n Marghazar Mansehra',
+                'Karakoeam Highway \nMarghazar Mansehra',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
