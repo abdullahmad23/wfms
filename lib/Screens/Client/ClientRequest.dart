@@ -90,7 +90,7 @@ class _ClientRequestState extends State<ClientRequest> {
                            ),
                            ElevatedButton(
                              onPressed: (){},
-                             child: Text('Buy'),
+                             child: Text('Pay Now'),
                             style: ElevatedButton.styleFrom(
                              // backgroundColor: Color(0xff5282FF).withOpacity( ),
                             ),
