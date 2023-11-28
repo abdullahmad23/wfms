@@ -26,9 +26,9 @@ class _ClientHomeState extends State<ClientHome> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: [
-              ProductCard(),
-              foodcontainer(),
-              foodcontainer(),
+              ProductCard( name:'biryani'),
+              ProductCard( name:'kala'),
+            
        
             ]),
           )
