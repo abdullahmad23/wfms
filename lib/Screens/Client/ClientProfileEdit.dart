@@ -16,6 +16,8 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   TextEditingController _updateAddressController = TextEditingController();
   TextEditingController _updatePhoneNoController = TextEditingController();
 
+  final updateProfile = <>
+
   UpdateProfiledetail(){
 
   }

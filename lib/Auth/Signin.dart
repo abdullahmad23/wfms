@@ -108,7 +108,7 @@ class _SignInState extends State<SignIn> {
             .then((User) {
           // Create a new user with a first and last name
           final user = <String, dynamic>{
-            "first": _NameController.text,
+            "name": _NameController.text,
             "email": _EmailController.text,
             "phone": _PhNumController.text,
             "type": widget.title,
