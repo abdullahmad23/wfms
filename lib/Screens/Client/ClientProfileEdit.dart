@@ -38,7 +38,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
 
               ElevatedButton(
                 onPressed: UpdateProfiledetail,
-                child: Text('save',style: TextStyle(fontSize: 15.0, color:Colors.white),),
+                child: Text('Save',style: TextStyle(fontSize: 15.0, color:Colors.white),),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xff7FBD50),
                   shape: RoundedRectangleBorder(

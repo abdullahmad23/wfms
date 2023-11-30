@@ -59,7 +59,7 @@ class _ClientProfileState extends State<ClientProfile> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 90.0,
-          titleTextStyle: TextStyle(fontSize: 12.0),
+          titleTextStyle: TextStyle(fontSize: 12.01),
 
           title: AppLogo(),
           centerTitle: true,
