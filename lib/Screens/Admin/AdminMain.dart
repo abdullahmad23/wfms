@@ -3,11 +3,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Auth/VarificationScreen.dart';
+import 'package:waste/Screens/Admin/AdminRequestManagment.dart';
 
-import 'admin_application_state.dart';
-import 'admin_home.dart';
-import 'admin_profile.dart';
-import 'admin_request_managment.dart';
+import 'AdminApplicationState.dart';
+import 'AdminHome.dart';
+import 'AdminProfile.dart';
 
 class AdminMain extends StatefulWidget {
   const AdminMain({super.key});
