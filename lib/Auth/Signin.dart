@@ -342,9 +342,10 @@ class _SignInState extends State<SignIn> {
                           child: Text(
                             'LOGIN',
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: GoogleFonts.inter().fontFamily),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                            ),
                           ),
                         ),
                       ],

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:waste/Screens/Hotel/HotelAddFood.dart';
 import 'package:waste/Screens/SelectionScreen.dart';
 import 'package:waste/firebase_options.dart';
 
@@ -34,7 +35,9 @@ class _MyAppState extends State<MyApp> {
         const Duration(seconds: 3),
         () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const SelectionScreen(),),
+              MaterialPageRoute(
+                builder: (context) => const SelectionScreen(),
+              ),
             ));
   }
 
