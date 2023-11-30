@@ -92,8 +92,7 @@ class _SignInState extends State<SignIn> {
       EasyLoading.dismiss();
     } else {
       EasyLoading.dismiss();
-      ScaffoldMessenger.of(context)
-          .showSnackBar('Double check Your fields' as SnackBar);
+      EasyLoading.showToast('select fields');
     }
   }
 
@@ -142,8 +141,7 @@ class _SignInState extends State<SignIn> {
       print(_PhNumController.text);
     } else {
       EasyLoading.dismiss();
-      ScaffoldMessenger.of(context)
-          .showSnackBar("Double check Your fields" as SnackBar);
+      EasyLoading.showToast('status');
     }
   }
 
@@ -158,7 +156,7 @@ class _SignInState extends State<SignIn> {
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.arrow_back_ios_new_outlined,
                       color: Colors.grey,
                       size: 20,
@@ -170,7 +168,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 Stack(
@@ -178,7 +176,7 @@ class _SignInState extends State<SignIn> {
                     Container(
                       height: 100,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
                               topLeft: Radius.circular(20)),
@@ -189,7 +187,7 @@ class _SignInState extends State<SignIn> {
                           // Got To LOgin
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0Xff1B2E0D),
+                                backgroundColor: const Color(0Xff1B2E0D),
                                 elevation: 0),
                             onPressed: () {
                               setState(() {
@@ -210,7 +208,7 @@ class _SignInState extends State<SignIn> {
                           // go to sign up
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0Xff1B2E0D),
+                                backgroundColor: const Color(0Xff1B2E0D),
                                 elevation: 0),
                             onPressed: () {
                               setState(() {
@@ -234,7 +232,7 @@ class _SignInState extends State<SignIn> {
                     Positioned(
                         bottom: 0,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(20),
                                   topLeft: Radius.circular(20)),
@@ -248,20 +246,20 @@ class _SignInState extends State<SignIn> {
 
                 Visibility(
                   visible: isSignInPage,
-                  child: Container(
+                  child: SizedBox(
                     height: 6000,
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Client',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Email',
@@ -279,7 +277,8 @@ class _SignInState extends State<SignIn> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Email can't be Empty";
-                            } else if (!RegExp("^[a-zA-Z0-9.a-zA-Z0-9.!#%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]")
+                            } else if (!RegExp(
+                                    "^[a-zA-Z0-9.a-zA-Z0-9.!#%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]")
                                 .hasMatch(value)) {
                               return "Please enter a valid email";
                             } else {
@@ -287,10 +286,10 @@ class _SignInState extends State<SignIn> {
                             }
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Password',
@@ -315,9 +314,10 @@ class _SignInState extends State<SignIn> {
                             if (value!.isEmpty) {
                               return "please fill the field";
                             }
+                            return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         // Row(mainAxisAlignment: MainAxisAlignment.end,
@@ -325,7 +325,7 @@ class _SignInState extends State<SignIn> {
                         //     Text('Forgot Password?'),
                         //   ],
                         // ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
 
@@ -335,9 +335,9 @@ class _SignInState extends State<SignIn> {
                                 borderRadius:
                                     BorderRadius.circular(32), // <-- Radius
                               ),
-                              backgroundColor: Color(0Xff1B2E0D),
+                              backgroundColor: const Color(0Xff1B2E0D),
                               elevation: 0,
-                              minimumSize: Size(330, 60)),
+                              minimumSize: const Size(330, 60)),
                           onPressed: HandleSignIn,
                           child: Text(
                             'LOGIN',
@@ -366,10 +366,10 @@ class _SignInState extends State<SignIn> {
                               fontWeight: FontWeight.w700,
                               fontFamily: GoogleFonts.inter().fontFamily),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Name',
@@ -389,9 +389,10 @@ class _SignInState extends State<SignIn> {
                             if (value!.isEmpty) {
                               return "Name field Not be empty";
                             }
+                            return null;
                           },
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Email',
@@ -406,7 +407,8 @@ class _SignInState extends State<SignIn> {
                               hintText: 'Enter your Email ',
                               hintStyle: TextStyle(fontSize: 12),
                             ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Email can't be empty";
@@ -418,7 +420,7 @@ class _SignInState extends State<SignIn> {
                                 return null;
                               }
                             }),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Password',
@@ -446,7 +448,7 @@ class _SignInState extends State<SignIn> {
                             }
                           },
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               'Phone Number',
@@ -466,9 +468,10 @@ class _SignInState extends State<SignIn> {
                             if (value!.isEmpty) {
                               return "please fill the field";
                             }
+                            return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
@@ -477,9 +480,9 @@ class _SignInState extends State<SignIn> {
                                 borderRadius:
                                     BorderRadius.circular(32), // <-- Radius
                               ),
-                              backgroundColor: Color(0Xff1B2E0D),
+                              backgroundColor: const Color(0Xff1B2E0D),
                               elevation: 0,
-                              minimumSize: Size(330, 50)),
+                              minimumSize: const Size(330, 50)),
                           onPressed: HandleSignUp,
                           child: Text(
                             'SIGN UP',
