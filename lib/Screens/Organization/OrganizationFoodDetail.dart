@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 
-class FoodDetail extends StatefulWidget {
-  const FoodDetail({super.key});
+class OrganizationFoodDetail extends StatefulWidget {
+  const OrganizationFoodDetail({super.key});
 
   @override
-  State<FoodDetail> createState() => _FoodDetailState();
+  State<OrganizationFoodDetail> createState() => _OrganizationFoodDetailState();
 }
 
-class _FoodDetailState extends State<FoodDetail> {
+class _OrganizationFoodDetailState extends State<OrganizationFoodDetail> {
   Map FoodDetails = {
     'name': 'Biyani',
   };
 
   ShowOfferModel() {
     showModalBottomSheet(
-      shape:const RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(60), topRight: Radius.circular(60)),
       ),
       context: context,
       builder: (context) {
         return Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           height: MediaQuery.of(context).size.height * 0.5,
           child: Column(
             children: [
               Text("${FoodDetails['name']}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w500,
                   )),
-              Divider(
+              const Divider(
                 color: Colors.black,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Quantity",
+                  const Text("Quantity",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -48,14 +48,14 @@ class _FoodDetailState extends State<FoodDetail> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(
                             20), // Adjust the border radius as needed
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black, // Border color
                           width: 2.0, // Border width
                         ),
                       ),
                     ),
                   ),
-                  Text("Price",
+                  const Text("Price",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -66,7 +66,7 @@ class _FoodDetailState extends State<FoodDetail> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(
                             20), // Adjust the border radius as needed
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black, // Border color
                           width: 2.0, // Border width
                         ),
@@ -80,10 +80,10 @@ class _FoodDetailState extends State<FoodDetail> {
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25))),
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xff1D331B)),
+                            MaterialStateProperty.all(const Color(0xff1D331B)),
                       ),
                       onPressed: () {},
-                      child: Text("Submit"))
+                      child: const Text("Submit"))
                 ],
               )
             ],
@@ -99,11 +99,11 @@ class _FoodDetailState extends State<FoodDetail> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios_new,
           color: Color(0xff7FBD50),
         ),
-        title: Text(
+        title: const Text(
           "Food Details",
           style: TextStyle(
               fontSize: 24,
@@ -117,12 +117,12 @@ class _FoodDetailState extends State<FoodDetail> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.4,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/Mask group.png'), fit: BoxFit.fill),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -135,11 +135,11 @@ class _FoodDetailState extends State<FoodDetail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("${FoodDetails['name']}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                         )),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text("Amount: 50 KG",
@@ -161,13 +161,13 @@ class _FoodDetailState extends State<FoodDetail> {
                     )
                   ],
                 ),
-                Divider(
+                const Divider(
                   color: Colors.black,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Row(
+                const Row(
                   children: [
                     Icon(
                       Icons.date_range,
@@ -193,34 +193,34 @@ class _FoodDetailState extends State<FoodDetail> {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                Text("Hotel Name",
+                const Text("Hotel Name",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Text("Softxion Shadi Hall",
+                const Text("Softxion Shadi Hall",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text("Address ",
+                const Text("Address ",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Text("Hazara University ",
+                const Text("Hazara University ",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -228,7 +228,7 @@ class _FoodDetailState extends State<FoodDetail> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Center(
@@ -238,10 +238,11 @@ class _FoodDetailState extends State<FoodDetail> {
                       Size(MediaQuery.of(context).size.width - 50, 60)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25))),
-                  backgroundColor: MaterialStateProperty.all(Color(0xff1D331B)),
+                  backgroundColor:
+                      MaterialStateProperty.all(const Color(0xff1D331B)),
                 ),
                 onPressed: ShowOfferModel,
-                child: Text("Send Offer",
+                child: const Text("Send Offer",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,

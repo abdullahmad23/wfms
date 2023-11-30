@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:waste/Screens/Client/FoodDetail.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+final String name;
 
+  const ProductCard({super.key, required this.name});
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        onTap: Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetail()));
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetail()));
       },
       child:Container(
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -22,7 +23,7 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Biryani',
+              '$name',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
