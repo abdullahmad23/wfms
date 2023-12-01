@@ -11,16 +11,11 @@ class ClientProfileEdit extends StatefulWidget {
 }
 
 class _ClientProfileEditState extends State<ClientProfileEdit> {
-
-  TextEditingController _updateNameController = TextEditingController();
-  TextEditingController _updateAddressController = TextEditingController();
-  TextEditingController _updatePhoneNoController = TextEditingController();
-
-  final updateProfile = <>
-
-  UpdateProfiledetail(){
-
-  }
+  final TextEditingController _updateNameController = TextEditingController();
+  final TextEditingController _updateAddressController =
+      TextEditingController();
+  final TextEditingController _updatePhoneNoController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +25,36 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-             IconButton(
-                 onPressed: (){
-                   Navigator.pop(context);
-                 },
-                 icon: Icon(Icons.arrow_back_ios,size: 18,color: Color(0xff7FBD50),)),
-
-              Text('My Profile', style:TextStyle(fontSize: 24,fontWeight: FontWeight.w500,color:Color(0xff7FBD50))),
-
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    size: 18,
+                    color: Color(0xff7FBD50),
+                  )),
+              const Text('My Profile',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xff7FBD50))),
               ElevatedButton(
-                onPressed: UpdateProfiledetail,
-                child: Text('Save',style: TextStyle(fontSize: 15.0, color:Colors.white),),
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff7FBD50),
+                  backgroundColor: const Color(0xff7FBD50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
+                child: const Text(
+                  'Save',
+                  style: TextStyle(fontSize: 15.0, color: Colors.white),
+                ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -60,12 +64,12 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                 children: [
                   Container(
                     height: 200,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                   Positioned(
                       bottom: 0,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20)),
@@ -73,7 +77,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                         ),
                         width: MediaQuery.of(context).size.width,
                         height: 150,
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -109,7 +113,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                   Positioned(
                       bottom: 0,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20)),
@@ -120,7 +124,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                       )),
                   Positioned(
                     right: MediaQuery.of(context).size.width / 2 - 50,
-                    child: Container(
+                    child: const SizedBox(
                       height: 100,
                       width: 100,
                       child: CircleAvatar(
@@ -152,8 +156,8 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.0),
-                        Text('Name',
+                        const SizedBox(height: 8.0),
+                        const Text('Name',
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w700)),
                         TextFormField(
@@ -167,10 +171,11 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             if (value!.isEmpty) {
                               return "Name field Not be empty";
                             }
+                            return null;
                           },
                         ),
-                        SizedBox(height: 15.0),
-                        Text('Address',
+                        const SizedBox(height: 15.0),
+                        const Text('Address',
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w700)),
                         TextFormField(
@@ -184,10 +189,11 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             if (value!.isEmpty) {
                               return "Address field Not be empty";
                             }
+                            return null;
                           },
                         ),
-                        SizedBox(height: 15.0),
-                        Text('Phone',
+                        const SizedBox(height: 15.0),
+                        const Text('Phone',
                             style: TextStyle(
                                 fontSize: 17, fontWeight: FontWeight.w700)),
                         TextFormField(
@@ -202,6 +208,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             if (value!.isEmpty) {
                               return "Phone field Not be empty";
                             }
+                            return null;
                           },
                         ),
                       ],
