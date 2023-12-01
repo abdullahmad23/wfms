@@ -19,7 +19,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   TextEditingController _updatePhoneNoController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   Map<String, dynamic> UserDetails = {};
-   bool isLoading = true;
+   bool isLoading = false;
 
   void initState() {
     super.initState();
@@ -28,28 +28,28 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
 
   }
 
-  //
-  // UpdateProfiledetail() {
-  //   EasyLoading.show(status: 'Please Wait...');
-  //   if (_formkey.currentState!.validate()) {
-  //     try {
-  //       String UserId = FirebaseAuth.instance.currentUser!.uid;
-  //
-  //       FirebaseFirestore.instance.collection('users').doc(UserId).update({
-  //         "name": _updateNameController.text,
-  //         "phone": _updatePhoneNoController.text,
-  //       }).then((value) {
-  //         print('updated');
-  //         EasyLoading.dismiss();
-  //       });
-  //     }on FirebaseException catch(e){
-  //       EasyLoading.showError(e.code);
-  //     }catch (e){
-  //       EasyLoading.showError(e.toString());
-  //     }
-  // }
 
- // }
+  UpdateProfiledetail() {
+    EasyLoading.show(status: 'Please Wait...');
+    if (_formkey.currentState!.validate()) {
+      try {
+        String UserId = FirebaseAuth.instance.currentUser!.uid;
+
+        FirebaseFirestore.instance.collection('users').doc(UserId).update({
+          "name": _updateNameController.text,
+          "phone": _updatePhoneNoController.text,
+        }).then((value) {
+          print('updated');
+          EasyLoading.dismiss();
+        });
+      }on FirebaseException catch(e){
+        EasyLoading.showError(e.code);
+      }catch (e){
+        EasyLoading.showError(e.toString());
+      }
+  }
+
+ }
 
   getUserData() {
     String UserId = FirebaseAuth.instance.currentUser!.uid;
