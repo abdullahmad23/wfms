@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:waste/Components/AppLogo.dart';
 
 class HotelAddFood extends StatefulWidget {
@@ -10,6 +14,22 @@ class HotelAddFood extends StatefulWidget {
 }
 
 class _HotelAddFoodState extends State<HotelAddFood> {
+  File? image;
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+
+      setState(() => this.image = imageTemp);
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,14 +44,22 @@ class _HotelAddFoodState extends State<HotelAddFood> {
                 height: 20,
               ),
               InkWell(
-                child: Container(
+                onTap: pickImage,
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * .3,
-                  decoration: BoxDecoration(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 82, 94, 116),
+                    child: image != null
+                        ? Image.file(
+                            image!,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/imgplaceholder.png',
+                            fit: BoxFit.cover,
+                          ),
                   ),
-                  child: const Text('add Picture'),
                 ),
               ),
               const SizedBox(
