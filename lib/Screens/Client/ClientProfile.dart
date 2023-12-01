@@ -39,6 +39,8 @@ class _ClientProfileState extends State<ClientProfile> {
         setState(() {
           UserDetails = userDetails.data()!;
           isLoading = false;
+
+
         });
       });
     } on FirebaseException catch (e) {
