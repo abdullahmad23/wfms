@@ -10,6 +10,9 @@ class ClientRequest extends StatefulWidget {
 }
 
 class _ClientRequestState extends State<ClientRequest> {
+
+  bool flag = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,14 +41,22 @@ class _ClientRequestState extends State<ClientRequest> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          flag = true;
+                        });
+                      },
                       child: Text(
-                        'Active',
+                        'Active',style: TextStyle(color: flag?Colors.white:Color(0xff1D331B)),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff1D331B),
+                        backgroundColor: flag?Color(0xff1D331B):Colors.transparent,
+                        elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(color: Color(0xff1D331B),
+                          width: 2.0,
+                          ),
                         ),
                       ),
                     ),
@@ -53,12 +64,20 @@ class _ClientRequestState extends State<ClientRequest> {
                   SizedBox(width: 10.0),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('History'),
+                      onPressed: () {
+                        setState(() {
+                          flag = false;
+                        });
+                      },
+                      child: Text('History',style: TextStyle(color: flag?Color(0xff1D331B):Colors.white),),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff1D331B),
+                        backgroundColor: flag?Colors.transparent:Color(0xff1D331B),
+                        elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
+                          side: BorderSide(color: Color(0xff1D331B),
+                            width: 2.0,
+                          ),
                         ),
                       ),
                     ),
@@ -67,45 +86,67 @@ class _ClientRequestState extends State<ClientRequest> {
               ),
 
               Visibility(
-                child:Column(
+                visible: flag,
+                child: Column(
                   children: [
-                     Container(
-                       padding: EdgeInsets.all(8.0),
-                       decoration:BoxDecoration(
-                         color: Color(0xff5282FF),
-                         borderRadius: BorderRadius.circular(10),
+                    SizedBox(height: 10),
+                    RequestCard(Color(0xff5282FF), "Biryani", "pkr 440/10kg", "Pay Now", () { print('btn works');}),
 
-                       ),
-                       child: Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children:[
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-
-                         children: [
-                           Text('Biryani ',style: TextStyle(fontSize: 20,color:Colors.white,fontWeight:FontWeight.w600)),
-                           SizedBox(height: 3.0),
-                           Text('Pkr 400/10kg',style:TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color:Colors.white)),
-                         ],
-                           ),
-                           ElevatedButton(
-                             onPressed: (){},
-                             child: Text('Pay Now'),
-                            style: ElevatedButton.styleFrom(
-                             // backgroundColor: Color(0xff5282FF).withOpacity( ),
-                            ),
-                           ),
-                         ],
-                       ),
-                     ),
+                    SizedBox(height: 10),
+                    RequestCard(Color(0xffE42424), "Biryani", "pkr 440/10kg", "Dismiss", () { setState(() {flag = false;});}),
                   ],
                 ),
               ),
 
+              Visibility(
+                visible: flag,
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.green,
+                  ),
+              ),
 
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget RequestCard(Color bgColor,String productTitle,String productPrice,String btnText,Function() btnMethod){
+    return   Container(
+      padding: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(10),
+
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Text(productTitle, style: TextStyle(fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600)),
+              SizedBox(height: 3.0),
+
+              Text(productPrice, style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: btnMethod,
+            child: Text(btnText),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xffFFFFFF).withOpacity(0.5),
+            ),
+          ),
+        ],
       ),
     );
   }

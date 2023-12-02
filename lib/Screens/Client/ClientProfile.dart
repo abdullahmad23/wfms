@@ -160,28 +160,41 @@ class _ClientProfileState extends State<ClientProfile> {
 
                   Container(
                     padding: EdgeInsets.all(11),
-                    child: Column(children: [
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                       Text('Phone', style: TextStyle(
                           fontSize: 22, fontWeight: FontWeight.w600),),
                       Text(UserDetails['phone']),
 
-
-
-                      ElevatedButton(style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromARGB(255, 4, 32, 8)),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-
-                              )
-                          )
+                      Padding(
+                        padding:EdgeInsets.all(8.0),
+                        child: Divider(color: Colors.grey),
                       ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => SelectionScreen()));
-                          },
-                          child: Text('Logout')),
+
+                        Text('Address', style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w600),),
+                        Text("Address"),
+
+                    SizedBox(height:MediaQuery.of(context).size.height*0.2),
+                      Center(
+                        child: ElevatedButton(style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 4, 32, 8)),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+
+                                )
+                            )
+                        ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => SelectionScreen()));
+                            },
+                            child: Text('Logout')),
+                      ),
 
                     ],
                     ),

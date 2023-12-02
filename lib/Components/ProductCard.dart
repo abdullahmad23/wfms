@@ -12,12 +12,13 @@ final String name;
          Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetail()));
       },
       child:Container(
+        width: MediaQuery.of(context).size.width*1,
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
     margin: EdgeInsets.only(top: 15),
     decoration: BoxDecoration(
         border: Border.all(), borderRadius: BorderRadius.circular(18)),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +40,7 @@ final String name;
             ),
             SizedBox(height: 8.0,),
             Text(
-              'Bajna Moterway Road \nShinkiari',
+              'Bajna Moterway \nRoad Shinkiari',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -48,6 +49,7 @@ final String name;
             ),
             SizedBox(height: 8.0,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +65,7 @@ final String name;
                   ],
                 ),
                 SizedBox(
-                  width: 50,
+                 width: MediaQuery.of(context).size.width *0.10,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +84,22 @@ final String name;
             ),
           ],
         ),
-        SizedBox(child: Image.asset("assets/Mask group.png"))
+
+           SizedBox(width: 3.0,),
+             
+             Container(
+                 decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(8),
+                   image:DecorationImage(
+
+                     image:AssetImage("assets/Mask group.png"),
+                     fit: BoxFit.cover,
+                   ),
+                 ),
+                 width: MediaQuery.of(context).size.width*0.36,
+                 height: MediaQuery.of(context).size.height*0.20,
+
+             ),
       ],
     ),
   ) ,
