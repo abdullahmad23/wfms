@@ -77,8 +77,6 @@ class _ClientProfileState extends State<ClientProfile> {
           body: SafeArea(
       child: Column(
           children: [
-
-
             SizedBox(
               height: 20,
             ),

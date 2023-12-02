@@ -193,7 +193,6 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             ),
                           ],
                         ),
-
                         // ================= ============== =====================
                         SingleChildScrollView(
                           scrollDirection: Axis.vertical,
