@@ -15,10 +15,8 @@ class ClientProfileEdit extends StatefulWidget {
 
 class _ClientProfileEditState extends State<ClientProfileEdit> {
   final TextEditingController _updateNameController = TextEditingController();
-  final TextEditingController _updateAddressController =
-      TextEditingController();
-  final TextEditingController _updatePhoneNoController =
-      TextEditingController();
+  final TextEditingController _updateAddressController = TextEditingController();
+  final TextEditingController _updatePhoneNoController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   Map<String, dynamic> UserDetails = {};
   bool isLoading = false;
@@ -26,6 +24,9 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   @override
   void initState() {
     super.initState();
+    _updateNameController.text = '';
+    _updateAddressController.text = '';
+    _updatePhoneNoController.text = '';
 
     getUserData();
   }
@@ -61,11 +62,10 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
         .then((userDetails) {
       setState(() {
         UserDetails = userDetails.data()!;
-
+        print(UserDetails['img']);
         _updateNameController.text = UserDetails['name'];
         _updatePhoneNoController.text = UserDetails['phone'];
-        _updateAddressController.text = UserDetails['address'];
-        print('ma yahan khair khareyat sa ponch gaya hoo');
+
         isLoading = false;
       });
     });
@@ -140,7 +140,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        UserDetails['name'],
+                                        "${UserDetails['name']}",
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -158,7 +158,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                             width: 5,
                                           ),
                                           Text(
-                                            UserDetails['email'],
+                                           "${ UserDetails['email']}",
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16,
@@ -183,12 +183,11 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                 )),
                             Positioned(
                               right: MediaQuery.of(context).size.width / 2 - 50,
-                              child: const SizedBox(
+                              child:  SizedBox(
                                 height: 100,
                                 width: 100,
                                 child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "https://i0.wp.com/newdoorfiji.com/wp-content/uploads/2018/03/profile-img-1.jpg?ssl=1"),
+                                 backgroundImage:  NetworkImage(UserDetails["img"]),
                                 ),
                               ),
                             ),

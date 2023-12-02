@@ -38,6 +38,7 @@ class _ClientProfileState extends State<ClientProfile> {
           .then((userDetails) {
         setState(() {
           UserDetails = userDetails.data()!;
+          print(UserDetails);
           isLoading = false;
 
 
@@ -57,7 +58,7 @@ class _ClientProfileState extends State<ClientProfile> {
       child: CircularProgressIndicator(),
     )
         : Scaffold(
-        appBar: AppBar(
+          appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 90.0,
