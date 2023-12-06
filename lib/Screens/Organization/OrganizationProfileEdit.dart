@@ -182,21 +182,14 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                         ),
-                                        child: const Row(
-                                          children: [
+                                        child:
                                             Text(
                                               'Edit Image',
                                               style: TextStyle(
                                                   fontSize: 15.0,
                                                   color: Colors.white),
                                             ),
-                                            Icon(
-                                              Icons.edit,
-                                              size: 15.0,
-                                              color: Colors.white,
-                                            ),
-                                          ],
-                                        ),
+
                                       ),
                                     ],
                                   ),
@@ -218,19 +211,16 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
                               child: SizedBox(
                                 height: 100,
                                 width: 100,
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(UserDetails["img"]),
-                                  child: SizedBox(
-                                    child: image != null
-                                        ? Image.file(
-                                            image!,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.network(
-                                            UserDetails["img"],
-                                            fit: BoxFit.cover,
-                                          ),
+                                child:ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: image != null
+                                      ? Image.file(
+                                    image!,
+                                    fit: BoxFit.cover,
+                                  )
+                                      :  Image.network(
+                                    UserDetails['img'],
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
