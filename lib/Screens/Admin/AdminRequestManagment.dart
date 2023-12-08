@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 
-class OrganizationRequest extends StatefulWidget {
-  const OrganizationRequest({super.key});
+class AdminRequestManagment extends StatefulWidget {
+  const AdminRequestManagment({Key? key}) : super(key: key);
 
   @override
-  State<OrganizationRequest> createState() => _OrganizationRequestState();
+  State<AdminRequestManagment> createState() => _AdminRequestManagmentState();
 }
 
-class _OrganizationRequestState extends State<OrganizationRequest> {
+class _AdminRequestManagmentState extends State<AdminRequestManagment> {
   bool flag = true;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

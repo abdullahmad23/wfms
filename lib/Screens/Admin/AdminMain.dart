@@ -3,11 +3,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Auth/VarificationScreen.dart';
+import 'package:waste/Screens/Admin/AdminRequestManagment.dart';
 
-import 'admin_application_state.dart';
-import 'admin_home.dart';
-import 'admin_profile.dart';
-import 'admin_request_managment.dart';
+import 'AdminApplicationState.dart';
+import 'AdminHome.dart';
+import 'AdminProfile.dart';
 
 class AdminMain extends StatefulWidget {
   const AdminMain({super.key});
@@ -21,10 +21,10 @@ class _AdminMainState extends State<AdminMain> {
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   final pageIndex = [
-    const AdminApplicationStats(),
     const AdminHome(),
-    const AdminProfile(),
+    const AdminApplicationStats(),
     const AdminRequestManagment(),
+    const AdminProfile(),
   ];
 
   @override
@@ -55,13 +55,13 @@ class _AdminMainState extends State<AdminMain> {
         height: 60.0,
         items: const <Widget>[
           Icon(
-            Icons.add,
+            Icons.home,
             size: 30,
             color: Colors.white,
           ),
-          Icon(Icons.list, size: 30, color: Colors.white),
-          Icon(Icons.compare_arrows, size: 30, color: Colors.white),
-          Icon(Icons.call_split, size: 30, color: Colors.white),
+          Icon(Icons.addchart, size: 30, color: Colors.white),
+          Icon(Icons.request_page, size: 30, color: Colors.white),
+          Icon(Icons.account_circle, size: 30, color: Colors.white),
         ],
         color: const Color(0xff1b2e0d),
         buttonBackgroundColor: const Color(0xff7FBD50),
