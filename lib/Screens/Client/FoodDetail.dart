@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FoodDetail extends StatefulWidget {
@@ -13,7 +15,40 @@ class FoodDetail extends StatefulWidget {
 class _FoodDetailState extends State<FoodDetail> {
   late String price = widget.foodData['Price'];
   late String qty = widget.foodData['Qty'];
+  Map<String, dynamic> UserDetails = {};
+
   late int total = int.parse(price) * int.parse(qty);
+
+  TextEditingController _quantityController = TextEditingController();
+  TextEditingController _priceController = TextEditingController();
+
+  void submitOrder() {
+    print('pressed');
+    try {
+      String UserId = FirebaseAuth.instance.currentUser!.uid;
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(UserId)
+          .get()
+          .then((userData) {
+        setState(() {
+          UserDetails = userData.data()!;
+        });
+      });
+      FirebaseFirestore.instance.collection("offers").add({
+        "Price": _priceController.text,
+        "Qty": _quantityController.text,
+        "creted_by": UserId,
+        "CustomerName": UserDetails['name'],
+        "Status": false,
+        "Dismiss": false,
+        "FoodTitle": widget.foodData['Title'],
+        "HotelId": widget.foodData['Created_By'],
+      }).then((value) => null);
+    } on FirebaseException catch (e) {
+      print(e);
+    } catch (e) {}
+  }
 
   ShowOfferModel() {
     showModalBottomSheet(
@@ -23,89 +58,92 @@ class _FoodDetailState extends State<FoodDetail> {
       ),
       context: context,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(20),
-          // height: MediaQuery.of(context).size.height * 1,
-          child: Column(
-            children: [
-              Text("${widget.foodData['Title']}",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                  )),
-              Divider(
-                color: Colors.black,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Quantity",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      )),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter your quantity',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                            20), // Adjust the border radius as needed
-                        borderSide: BorderSide(
-                          color: Colors.black, // Border color
-                          width: 2.0, // Border width
-                        ),
+        return Column(
+          children: [
+            Text("${widget.foodData['Title']}",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                )),
+            Divider(
+              color: Colors.black,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Quantity",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    )),
+                SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  controller: _quantityController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your quantity',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          20), // Adjust the border radius as needed
+                      borderSide: BorderSide(
+                        color: Colors.black, // Border color
+                        width: 2.0, // Border width
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Price",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      )),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter your Price',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                            20), // Adjust the border radius as needed
-                        borderSide: BorderSide(
-                          color: Colors.black, // Border color
-                          width: 2.0, // Border width
-                        ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text("Price",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: _priceController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your Price',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          20), // Adjust the border radius as needed
+                      borderSide: BorderSide(
+                        color: Colors.black, // Border color
+                        width: 2.0, // Border width
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            Size(MediaQuery.of(context).size.width - 50, 60)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25))),
-                        backgroundColor:
-                            MaterialStateProperty.all(Color(0xff1D331B)),
-                      ),
-                      onPressed: () {},
-                      child: Text("Submit"))
-                ],
-              )
-            ],
-          ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all(
+                          Size(MediaQuery.of(context).size.width - 50, 60)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25))),
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xff1D331B)),
+                    ),
+                    onPressed: submitOrder,
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(color: Colors.white),
+                    ))
+              ],
+            )
+          ],
         );
       },
     );

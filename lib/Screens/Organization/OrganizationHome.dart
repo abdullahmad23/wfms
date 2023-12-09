@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 import 'package:waste/Components/ProductCard.dart';
@@ -10,7 +11,22 @@ class OrganizationHome extends StatefulWidget {
 }
 
 class _OrganizationHomeState extends State<OrganizationHome> {
+  List<Map> foodDetails = [{}];
   TextEditingController searchBarText = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance.collection("food").get().then((foods) {
+      for (var food in foods.docs) {
+        setState(() {
+          foodDetails.add(food.data());
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

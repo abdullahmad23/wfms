@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 
@@ -10,6 +12,30 @@ class HotelOrderRequests extends StatefulWidget {
 
 class _HotelOrderRequestsState extends State<HotelOrderRequests> {
   bool flag = true;
+
+  List<Map<String, dynamic>> allRequest = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getRequests();
+  }
+
+  void getRequests() {
+    String UserId = FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance
+        .collection("offers")
+        .where("HotelId", isEqualTo: UserId)
+        .get()
+        .then((request) {
+      for (var req in request.docs) {
+        setState(() {
+          allRequest.add(req.data());
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,18 +123,12 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
                 visible: flag,
                 child: Column(
                   children: [
-                    const SizedBox(height: 10),
-                    RequestCard(const Color(0xff5282FF), "Biryani",
-                        "pkr 440/10kg", "Pay Now", () {
-                      print('btn works');
-                    }),
-                    const SizedBox(height: 10),
-                    RequestCard(const Color(0xffE42424), "Biryani",
-                        "pkr 440/10kg", "Dismiss", () {
-                      setState(() {
-                        flag = false;
-                      });
-                    }),
+                    ...allRequest.map((allreq) => RequestCard(
+                        allreq['Status'],
+                        "${allreq['FoodTitle']}",
+                        "${allreq['Price']} Pkr/${allreq['Qty']} Kg",
+                        "View",
+                        () => null))
                   ],
                 ),
               ),
@@ -126,12 +146,12 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
     );
   }
 
-  Widget RequestCard(Color bgColor, String productTitle, String productPrice,
+  Widget RequestCard(bool bgColor, String productTitle, String productPrice,
       String btnText, Function() btnMethod) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: bgColor ? Colors.red : Colors.blue,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
