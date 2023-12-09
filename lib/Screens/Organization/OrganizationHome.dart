@@ -26,10 +26,7 @@ class _OrganizationHomeState extends State<OrganizationHome> {
           searchBar(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(children: [
-              ProductCard(name: 'biryani'),
-              ProductCard(name: 'kala'),
-            ]),
+            child: Column(children: []),
           )
         ]),
       ),

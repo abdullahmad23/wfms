@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 import 'package:waste/Components/ProductCard.dart';
@@ -11,6 +12,20 @@ class ClientHome extends StatefulWidget {
 
 class _ClientHomeState extends State<ClientHome> {
   TextEditingController searchBarText = TextEditingController();
+  List<Map> FoodDetails = [{}];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance.collection('Food').get().then((foods) {
+      for (var food in foods.docs) {
+        print(food.data());
+        setState(() {
+          FoodDetails.add(food.data());
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +36,15 @@ class _ClientHomeState extends State<ClientHome> {
             width: double.infinity,
           ),
           AppLogo(),
-          SizedBox(height: 8.0,),
+          SizedBox(
+            height: 8.0,
+          ),
           searchBar(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(children: [
-              ProductCard( name:'biryani'),
-              ProductCard( name:'kala'),
-            
-       
-            ]),
+            child: Column(
+                children: FoodDetails.map((food) => ProductCard(data: food))
+                    .toList()),
           )
         ]),
       ),
@@ -95,7 +109,9 @@ Widget foodcontainer() {
                 color: Color(0xff7fbd50),
               ),
             ),
-            SizedBox(height: 8.0,),
+            SizedBox(
+              height: 8.0,
+            ),
             Text(
               'Bajna Moterway Road \nShinkiari',
               style: TextStyle(
@@ -104,7 +120,9 @@ Widget foodcontainer() {
                 color: Color(0xff4a4951),
               ),
             ),
-            SizedBox(height: 8.0,),
+            SizedBox(
+              height: 8.0,
+            ),
             Row(
               children: [
                 Column(
