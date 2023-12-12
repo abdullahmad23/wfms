@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:waste/Components/AppLogo.dart';
 import 'package:intl/intl.dart';
+import 'package:waste/Screens/Hotel/HotelHome.dart';
+import 'package:waste/Screens/Hotel/HotelMain.dart';
+import 'package:waste/Screens/Organization/OrganizationHome.dart';
 
 class HotelAddFood extends StatefulWidget {
   const HotelAddFood({super.key});
@@ -20,6 +24,7 @@ class HotelAddFood extends StatefulWidget {
 class _HotelAddFoodState extends State<HotelAddFood> {
   String Imgurl = '';
   File? image;
+  var documentId;
   DateTime selectedDate = DateTime.now();
   TextEditingController _foodNameController = TextEditingController();
   TextEditingController _foodQuantityController = TextEditingController();
@@ -27,21 +32,32 @@ class _HotelAddFoodState extends State<HotelAddFood> {
   TextEditingController _foodPriceController = TextEditingController();
 
   void uploadProduct() {
-    String id = FirebaseAuth.instance.currentUser!.uid;
-    uploadFileToFirebase(image!).then((value) {
-      Map<String, dynamic> Data = {
-        'Title': _foodNameController.text,
-        'Qty': _foodQuantityController.text,
-        'Price': _foodPriceController.text,
-        'Exp': _foodExpiryController.text,
-        'img': Imgurl,
-        'Created_By': id,
-      };
-      FirebaseFirestore.instance
-          .collection('Food')
-          .add(Data)
-          .then((value) => null);
-    });
+    try {
+      String id = FirebaseAuth.instance.currentUser!.uid;
+      uploadFileToFirebase(image!).then((value) {
+        Map<String, dynamic> Data = {
+          'Title': _foodNameController.text,
+          'Qty': _foodQuantityController.text,
+          'Price': _foodPriceController.text,
+          'Exp': _foodExpiryController.text,
+          'img': Imgurl,
+          'Created_By': id,
+        };
+        FirebaseFirestore.instance
+            .collection('Food')
+            .add(Data)
+            .then((DocumentReference doc) {
+          documentId = doc.id;
+        });
+      });
+    } on FirebaseException catch (e) {
+      EasyLoading.showError(e.code);
+    } catch (e) {
+      EasyLoading.showError(e.toString());
+    }
+    EasyLoading.showToast("Product is Uploaded");
+
+    print(" ======================= $documentId  =========================== ");
   }
 
   @override
@@ -233,7 +249,13 @@ class _HotelAddFoodState extends State<HotelAddFood> {
                         backgroundColor: const Color(0Xff1B2E0D),
                         elevation: 0,
                         minimumSize: const Size(330, 60)),
-                    onPressed: uploadProduct,
+                    onPressed: () {
+                      uploadProduct();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => HotelMain())));
+                    },
                     child: Text(
                       'Upload',
                       style: TextStyle(
