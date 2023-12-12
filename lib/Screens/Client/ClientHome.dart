@@ -12,7 +12,7 @@ class ClientHome extends StatefulWidget {
 
 class _ClientHomeState extends State<ClientHome> {
   TextEditingController searchBarText = TextEditingController();
-  List<Map> FoodDetails = [{}];
+  List<Map> FoodDetails = [];
   @override
   void initState() {
     // TODO: implement initState

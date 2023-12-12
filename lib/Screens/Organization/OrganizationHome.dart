@@ -11,14 +11,22 @@ class OrganizationHome extends StatefulWidget {
 }
 
 class _OrganizationHomeState extends State<OrganizationHome> {
-  List<Map> foodDetails = [{}];
+  List<Map> foodDetails = [];
   TextEditingController searchBarText = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseFirestore.instance.collection("food").get().then((foods) {
+    getData();
+  }
+
+  getData() {
+    FirebaseFirestore.instance.collection("Food").get().then((foods) {
+      print(foods);
+      print(
+          "=======================   ==============   =======================");
+      print("not responding");
       for (var food in foods.docs) {
         setState(() {
           foodDetails.add(food.data());
@@ -30,21 +38,29 @@ class _OrganizationHomeState extends State<OrganizationHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(children: [
-          const SizedBox(
-            width: double.infinity,
-          ),
-          AppLogo(),
-          const SizedBox(
-            height: 8.0,
-          ),
-          searchBar(),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(children: []),
-          )
-        ]),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(children: [
+            const SizedBox(
+              width: double.infinity,
+            ),
+            AppLogo(),
+            const SizedBox(
+              height: 8.0,
+            ),
+            searchBar(),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  ...foodDetails
+                      .map((food) => ProductCard(data: food))
+                      .toList(),
+                ],
+              ),
+            )
+          ]),
+        ),
       ),
     );
   }
