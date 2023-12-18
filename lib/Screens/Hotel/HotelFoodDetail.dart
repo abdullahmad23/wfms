@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:waste/Screens/Client/FoodDetail.dart';
+import 'package:waste/Screens/Hotel/HotelHome.dart';
+import 'package:waste/Screens/Hotel/HotelMain.dart';
 
 class HotelFoodDetail extends StatefulWidget {
   final Map foodDetails;
@@ -14,10 +18,32 @@ class _HotelFoodDetailState extends State<HotelFoodDetail> {
   late String price = widget.foodDetails['Price'];
   late int total = int.parse(price) + int.parse(qty);
 
-  void getDoumentId() {}
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void deleteFood() async {
+    try {
+      var foodDocId = widget.foodDetails['id'];
+      FirebaseFirestore.instance
+          .collection("Food")
+          .doc(foodDocId)
+          .delete()
+          .then((value) => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HotelMain())));
+    } on FirebaseException catch (e) {
+      EasyLoading.showError(e.code);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void Removebtn() {
-    print("removed");
+    EasyLoading.show(status: "please wait...");
+    deleteFood();
+    EasyLoading.dismiss();
   }
 
   @override

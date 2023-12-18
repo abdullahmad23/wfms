@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 
@@ -10,6 +13,41 @@ class OrganizationRequest extends StatefulWidget {
 
 class _OrganizationRequestState extends State<OrganizationRequest> {
   bool flag = true;
+  List<Map> allOffers = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDataDb();
+    // getDoumentId();
+  }
+
+//   void getDoumentId() async {
+//     DocumentReference doc_ref =
+//         FirebaseFirestore.instance.collection("offers").doc();
+//     print(doc_ref);
+//     print("object");
+// // DocumentSnapshot docSnap = await doc_ref.get();
+// // var doc_id2 = docSnap.reference.documentID;
+//   }
+
+  getDataDb() {
+    String UserId = FirebaseAuth.instance.currentUser!.uid;
+
+    FirebaseFirestore.instance
+        .collection("offers")
+        .where("creted_by", isEqualTo: UserId)
+        .get()
+        .then((foodOffer) {
+      // print(foodOffer);
+      // print(foodOffer);
+      for (var offer in foodOffer.docs) {
+        setState(() {
+          allOffers.add(offer.data());
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,18 +135,14 @@ class _OrganizationRequestState extends State<OrganizationRequest> {
                 visible: flag,
                 child: Column(
                   children: [
-                    const SizedBox(height: 10),
-                    RequestCard(const Color(0xff5282FF), "Biryani",
-                        "pkr 440/10kg", "Pay Now", () {
-                      print('btn works');
-                    }),
-                    const SizedBox(height: 10),
-                    RequestCard(const Color(0xffE42424), "Biryani",
-                        "pkr 440/10kg", "Dismiss", () {
-                      setState(() {
-                        flag = false;
-                      });
-                    }),
+                    ...allOffers
+                        .map((req) => RequestCard(
+                            req['Status'],
+                            "${req['FoodTitle']}",
+                            "${req['Price']} Pkr/${req['Qty']} Kg",
+                            "panding",
+                            () => null))
+                        .toList(),
                   ],
                 ),
               ),
@@ -126,12 +160,12 @@ class _OrganizationRequestState extends State<OrganizationRequest> {
     );
   }
 
-  Widget RequestCard(Color bgColor, String productTitle, String productPrice,
+  Widget RequestCard(bool bgColor, String productTitle, String productPrice,
       String btnText, Function() btnMethod) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: bgColor,
+        color: bgColor ? Colors.red : Colors.blue,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

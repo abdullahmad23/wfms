@@ -33,7 +33,9 @@ class _HotelHomeState extends State<HotelHome> {
           .then((products) {
         for (var prod in products.docs) {
           setState(() {
-            allProducts.add(prod.data());
+            Map temp = prod.data();
+            temp['id'] = prod.id;
+            allProducts.add(temp);
           });
         }
       });
