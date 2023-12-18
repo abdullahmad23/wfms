@@ -14,14 +14,47 @@ class _AdminApplicationStatsState extends State<AdminApplicationStats> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Getstats();
   }
 
+  int _totalOrg = 0;
+  int _totalHotels = 0;
+  int _totalUser = 0;
   final urlImges = [
     "assets/hotelVector1.png",
     "assets/hotelVector2.png",
     "assets/hotelVector1.png",
     "assets/hotelVector2.png",
   ];
+  Getstats() async {
+    final qurey = FirebaseFirestore.instance.collection('users');
+    // Get Count of Organization
+    qurey.where('type', isEqualTo: 'Organization').count().get().then((value) {
+      setState(() {
+        _totalOrg = value.count;
+      });
+    });
+    // Get Count of Hotel
+    qurey.where('type', isEqualTo: 'Hotel').count().get().then((value) {
+      setState(() {
+        _totalHotels = value.count;
+      });
+    });
+    // Get Count of Hotel
+    qurey.where('type', isEqualTo: 'Client').count().get().then((value) {
+      setState(() {
+        _totalUser = value.count;
+      });
+    });
+    // qurey.where('type', isEqualTo: 'Hotel').get().then((value)  {
+    //   setState(() {
+
+    //     for (var i = 0; i < count; i++) {
+
+    //     }
+    //   });
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +84,8 @@ class _AdminApplicationStatsState extends State<AdminApplicationStats> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                statesCard(text: "Organization", totalNo: "155"),
-                statesCard(text: "Hotel", totalNo: "89"),
+                statesCard(text: "Organization", totalNo: "$_totalOrg"),
+                statesCard(text: "Hotel", totalNo: "$_totalHotels"),
               ],
             ),
             SizedBox(
@@ -61,7 +94,7 @@ class _AdminApplicationStatsState extends State<AdminApplicationStats> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                statesCard(text: "User", totalNo: "1050"),
+                statesCard(text: "User", totalNo: "$_totalUser"),
               ],
             ),
           ],
@@ -72,7 +105,7 @@ class _AdminApplicationStatsState extends State<AdminApplicationStats> {
 
   Widget buildImage(String urlImage, int Index) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       width: double.infinity,
       color: Colors.grey,
       child: Image.asset(
@@ -87,18 +120,18 @@ class _AdminApplicationStatsState extends State<AdminApplicationStats> {
       height: MediaQuery.of(context).size.height * 0.15,
       width: MediaQuery.of(context).size.width * 0.40,
       decoration: BoxDecoration(
-        color: Color(0xff7FBD50),
+        color: const Color(0xff7FBD50),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(
           totalNo,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.w600),
         ),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w400),
         )
       ]),

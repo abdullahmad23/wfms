@@ -11,6 +11,8 @@ class UserDetailsPage extends StatefulWidget {
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
   Map _user = {};
+  bool isVerified = false;
+  @override
   void initState() {
     getUser();
   }
@@ -23,6 +25,8 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
         .then((User) {
       setState(() {
         _user = User.data()!;
+
+        isVerified = _user['varified'];
       });
     });
   }
@@ -31,7 +35,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.id)
-        .update({'verified': true}).then((User) {
+        .update({'varified': true}).then((User) {
       Navigator.pop(context);
     });
   }
@@ -40,7 +44,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(widget.id)
-        .update({'verified': false}).then((User) {
+        .update({'varified': false}).then((User) {
       Navigator.pop(context);
     });
   }
@@ -63,7 +67,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Name :",
                 style: TextStyle(
                   fontSize: 24,
@@ -72,7 +76,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               Text(
                 "${_user['name']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
@@ -81,7 +85,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Type :",
                 style: TextStyle(
                   fontSize: 18,
@@ -90,7 +94,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               Text(
                 "${_user['type']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
@@ -99,7 +103,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Phone :",
                 style: TextStyle(
                   fontSize: 18,
@@ -108,7 +112,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               Text(
                 "${_user['phone']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
@@ -117,7 +121,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Mail :",
                 style: TextStyle(
                   fontSize: 18,
@@ -126,7 +130,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               Text(
                 "${_user['email']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
@@ -135,7 +139,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           ),
           Row(
             children: [
-              Text(
+              const Text(
                 "Verified :",
                 style: TextStyle(
                   fontSize: 18,
@@ -144,7 +148,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               Text(
                 "${_user['verified']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
@@ -154,16 +158,17 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    approveHandler();
-                  },
-                  child: Text("Approved")),
-              ElevatedButton(
-                  onPressed: () {
-                    rejectedHandler();
-                  },
-                  child: Text("Rejected"))
+              !isVerified
+                  ? ElevatedButton(
+                      onPressed: () {
+                        approveHandler();
+                      },
+                      child: const Text("Approved"))
+                  : ElevatedButton(
+                      onPressed: () {
+                        rejectedHandler();
+                      },
+                      child: const Text("Rejected"))
             ],
           )
         ],
