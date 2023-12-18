@@ -161,7 +161,7 @@ class _HotelProfileState extends State<HotelProfile> {
                   Container(
                     padding: EdgeInsets.all(11),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Phone', style: TextStyle(
@@ -177,7 +177,7 @@ class _HotelProfileState extends State<HotelProfile> {
                             fontSize: 22, fontWeight: FontWeight.w600),),
                         Text("Address"),
 
-                        SizedBox(height:MediaQuery.of(context).size.height*0.2),
+                        SizedBox(height:MediaQuery.of(context).size.height*0.02),
                         Center(
                           child: ElevatedButton(style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(

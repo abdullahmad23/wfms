@@ -12,10 +12,11 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  List<Map> _Users = [];
+  final List<Map> _Users = [];
   @override
   void initState() {
     getUsers();
+    print('hello');
   }
 
   getUsers() async {
@@ -45,8 +46,8 @@ class _AdminHomeState extends State<AdminHome> {
         body: SingleChildScrollView(
       child: Column(
         children: _Users.map(
-          (_user) => Userdetails(context, "${_user['name']}",
-              "${_user['type']}", "${_user['phone']}", "${_user['id']}"),
+          (user) => Userdetails(context, "${user['name']}", "${user['type']}",
+              "${user['phone']}", "${user['id']}"),
         ).toList(),
       ),
     ));
@@ -68,19 +69,19 @@ Widget Userdetails(context, name, type, address, id) {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
                 Radius.circular(15.0) //                 <--- border radius here
                 ),
             border: Border.all(color: Colors.blueAccent)),
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 1 / 9,
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5),
+            const Padding(
+              padding: EdgeInsets.only(right: 5),
               child: CircleAvatar(
                 radius: 30,
                 backgroundImage: NetworkImage(

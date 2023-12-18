@@ -52,10 +52,16 @@ class _HotelFoodDetailState extends State<HotelFoodDetail> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: Color(0xff7FBD50),
-        ),
+        leading:  IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 18,
+                                  color: Color(0xff7FBD50),
+                                )),
+       
         title: Text(
           "Food Details",
           style: TextStyle(

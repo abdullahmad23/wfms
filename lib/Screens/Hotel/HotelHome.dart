@@ -15,6 +15,7 @@ class HotelHome extends StatefulWidget {
 
 class _HotelHomeState extends State<HotelHome> {
   List<Map> allProducts = [];
+  
 
   @override
   void initState() {
@@ -95,6 +96,15 @@ class _HotelHomeState extends State<HotelHome> {
   }
 
   Widget foodcontainer(Map food) {
+    String title=food['Title'];
+if (title.length>=10) {
+    String trimmedString =title.substring(0, 10);
+}else {
+ print(title);
+}
+// String trimmedString =title.substring(0, 10);
+   // String trimTitle=title..characters.take(7);
+  //  print("Trimmed String: $trimmedString");
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -114,7 +124,7 @@ class _HotelHomeState extends State<HotelHome> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${food['Title']}",
+                  "${food[title]}",
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -156,8 +166,8 @@ class _HotelHomeState extends State<HotelHome> {
               ],
             ),
             SizedBox(
-                height: 20.0,
-                width: 20.0,
+                height: 120.0,
+                width: 120.0,
                 child: Image.network("${food['img']}")),
           ],
         ),
