@@ -19,7 +19,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isSignInPage = true;
-  bool ischangecolor = true;
+  bool ischangecolor = false;
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _NameController = TextEditingController();
   final TextEditingController _PhNumController = TextEditingController();
@@ -192,6 +192,7 @@ class _SignInState extends State<SignIn> {
                             onPressed: () {
                               setState(() {
                                 isSignInPage = true;
+                                ischangecolor =true;
                               });
                             },
                             child: Text(
@@ -202,7 +203,8 @@ class _SignInState extends State<SignIn> {
                                   fontFamily: GoogleFonts.inter().fontFamily,
                                   color: ischangecolor
                                       ? Colors.white
-                                      : Colors.grey),
+                                      : Colors.grey
+                                      ),
                             ),
                           ),
                           // go to sign up
@@ -213,6 +215,7 @@ class _SignInState extends State<SignIn> {
                             onPressed: () {
                               setState(() {
                                 isSignInPage = false;
+                                ischangecolor =false;
                               });
                             },
                             child: Text(
@@ -247,108 +250,110 @@ class _SignInState extends State<SignIn> {
                 Visibility(
                   visible: isSignInPage,
                   child: SizedBox(
-                    height: 6000,
                     width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Client',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Row(
-                          children: [
-                            Text(
-                              'Email',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-
-                        TextFormField(
-                          controller: _EmailController,
-                          decoration: const InputDecoration(
-                              hintText: "Enter your Email"),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Email can't be Empty";
-                            } else if (!RegExp(
-                                    "^[a-zA-Z0-9.a-zA-Z0-9.!#%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]")
-                                .hasMatch(value)) {
-                              return "Please enter a valid email";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Row(
-                          children: [
-                            Text(
-                              'Password',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w700),
-                            ),
-                          ],
-                        ),
-
-                        TextFormField(
-                          controller: _PassWordController,
-                          decoration: const InputDecoration(
-                            hintText: "Enter your Password",
-                            suffix: Icon(
-                              Icons.visibility_off_rounded,
-                              color: Colors.grey,
-                              size: 20,
-                            ),
-                          ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "please fill the field";
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // Row(mainAxisAlignment: MainAxisAlignment.end,
-                        //   children: [
-                        //     Text('Forgot Password?'),
-                        //   ],
-                        // ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(32), // <-- Radius
-                              ),
-                              backgroundColor: const Color(0Xff1B2E0D),
-                              elevation: 0,
-                              minimumSize: const Size(330, 60)),
-                          onPressed: HandleSignIn,
-                          child: Text(
-                            'LOGIN',
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Client',
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: GoogleFonts.inter().fontFamily,
+                                fontSize: 18, fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Row(
+                            children: [
+                              Text(
+                                'Email',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w700),
+                              ),
+                            ],
+                          ),
+                      
+                          TextFormField(
+                            controller: _EmailController,
+                            decoration: const InputDecoration(
+                                hintText: "Enter your Email"),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email can't be Empty";
+                              } else if (!RegExp(
+                                      "^[a-zA-Z0-9.a-zA-Z0-9.!#%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+.[a-zA-Z]")
+                                  .hasMatch(value)) {
+                                return "Please enter a valid email";
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Row(
+                            children: [
+                              Text(
+                                'Password',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w700),
+                              ),
+                            ],
+                          ),
+                      
+                          TextFormField(
+                            controller: _PassWordController,
+                            decoration: const InputDecoration(
+                              hintText: "Enter your Password",
+                              suffix: Icon(
+                                Icons.visibility_off_rounded,
+                                color: Colors.grey,
+                                size: 20,
+                              ),
+                            ),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "please fill the field";
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          // Row(mainAxisAlignment: MainAxisAlignment.end,
+                          //   children: [
+                          //     Text('Forgot Password?'),
+                          //   ],
+                          // ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                      
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(32), // <-- Radius
+                                ),
+                                backgroundColor: const Color(0Xff1B2E0D),
+                                elevation: 0,
+                                minimumSize: const Size(330, 60)),
+                            onPressed: HandleSignIn,
+                            child: Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: GoogleFonts.inter().fontFamily,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

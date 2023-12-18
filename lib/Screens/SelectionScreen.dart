@@ -25,20 +25,20 @@ class SelectionScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 250,
+                  height: MediaQuery.of(context).size.height*0.4,
                   width: MediaQuery.of(context).size.width,
                   child: Image.asset("assets/selection.png"),
                 ),
-                const SizedBox(
-                  height: 40,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.01,
                 ),
                 const Text("Choose Your Identity",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
                     )),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: MediaQuery.of(context).size.height*0.01,
                 ),
                 const Text(
                     "Please select the following. It will help us to find your service faster and in efficient manner.",
@@ -46,15 +46,16 @@ class SelectionScreen extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     )),
-                const SizedBox(
-                  height: 50,
+                 SizedBox(
+                  height: MediaQuery.of(context).size.height*0.01,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Column(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child:
+                   Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ImgButton('Organization', 'assets/Organization.png',
                               () {
@@ -65,11 +66,11 @@ class SelectionScreen extends StatelessWidget {
                           }),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                       SizedBox(
+                  height: MediaQuery.of(context).size.height*0.05,
+                ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ImgButton('Hotel', 'assets/ServiceBell.png', () {
                             NaviGateToSignIn('Hotel');
