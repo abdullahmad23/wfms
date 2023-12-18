@@ -105,235 +105,237 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? Center(child: CircularProgressIndicator())
-        : SafeArea(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 6.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 18,
-                              color: Color(0xff7FBD50),
-                            )),
-                        const Text('My Profile',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff7FBD50))),
-                        ElevatedButton(
-                          onPressed: UpdateProfiledetail,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff7FBD50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          child: const Text(
-                            'Save',
-                            style:
-                                TextStyle(fontSize: 15.0, color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 200,
-                                color: Color.fromARGB(255, 255, 255, 255),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: isLoading
+              ? Center(child: CircularProgressIndicator())
+              : SafeArea(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 6.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 18,
+                                  color: Color(0xff7FBD50),
+                                )),
+                            const Text('My Profile',
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff7FBD50))),
+                            ElevatedButton(
+                              onPressed: UpdateProfiledetail,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff7FBD50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
                               ),
-                              Positioned(
-                                  bottom: 0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20)),
-                                      color: Color(0xff1D331B),
-                                    ),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 150,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: pickImage,
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xff7FBD50),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
+                              child: const Text(
+                                'Save',
+                                style:
+                                    TextStyle(fontSize: 15.0, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        child: Column(
+                          
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                  ),
+                                  Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20)),
+                                          color: Color(0xff1D331B),
+                                        ),
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 150,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: pickImage,
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Color(0xff7FBD50),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10.0),
+                                                ),
+                                              ),
+                                              child: Text(
+                                                'Edit Image',
+                                                style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    color: Colors.white),
+                                              ),
                                             ),
-                                          ),
-                                          child: Text(
-                                            'Edit Image',
+                                          ],
+                                        ),
+                                      )),
+                                  Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20)),
+                                          color: Color.fromARGB(255, 255, 255, 255),
+                                        ),
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 20,
+                                      )),
+                                  Positioned(
+                                    right:
+                                        MediaQuery.of(context).size.width / 2 - 50,
+                                    child: SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: image != null
+                                            ? Image.file(
+                                                image!,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.network(
+                                                UserDetails['img'],
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // ================= ============== =====================
+                              Padding(
+                                padding:  EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Form(
+                                    key: _formkey,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Edit Profile',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: GoogleFonts.inter()
+                                                      .fontFamily),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8.0),
+                                        const Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        TextFormField(
+                                          controller: _updateNameController,
+                                          decoration: const InputDecoration(
+                                    
+                                              // hintText: ,
+                                              // hintStyle: TextStyle(fontSize: 12),
+                                              ),
+                                          autovalidateMode:
+                                              AutovalidateMode.onUserInteraction,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Name field Not be empty";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        const SizedBox(height: 15.0),
+                                        const Text('Address',
                                             style: TextStyle(
-                                                fontSize: 15.0,
-                                                color: Colors.white),
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700)),
+                                        TextFormField(
+                                          controller: _updateAddressController,
+                                          decoration: const InputDecoration(
+                                            hintText: 'Address',
+                                            hintStyle: TextStyle(fontSize: 12),
                                           ),
+                                          autovalidateMode:
+                                              AutovalidateMode.onUserInteraction,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Address field Not be empty";
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        const SizedBox(height: 15.0),
+                                        const Text('Phone',
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700)),
+                                        TextFormField(
+                                          controller: _updatePhoneNoController,
+                                          keyboardType: TextInputType.number,
+                                          decoration: const InputDecoration(
+                                            hintText: 'Phone',
+                                            hintStyle: TextStyle(fontSize: 12),
+                                          ),
+                                          autovalidateMode:
+                                              AutovalidateMode.onUserInteraction,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Phone field Not be empty";
+                                            }
+                                            return null;
+                                          },
                                         ),
                                       ],
                                     ),
-                                  )),
-                              Positioned(
-                                  bottom: 0,
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20)),
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                    ),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 20,
-                                  )),
-                              Positioned(
-                                right:
-                                    MediaQuery.of(context).size.width / 2 - 50,
-                                child: SizedBox(
-                                  height: 100,
-                                  width: 100,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: image != null
-                                        ? Image.file(
-                                            image!,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.network(
-                                            UserDetails['img'],
-                                            fit: BoxFit.cover,
-                                          ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          // ================= ============== =====================
-                          SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                child: Form(
-                                  key: _formkey,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Edit Profile',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: GoogleFonts.inter()
-                                                    .fontFamily),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 8.0),
-                                      const Text(
-                                        'Name',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      TextFormField(
-                                        controller: _updateNameController,
-                                        decoration: const InputDecoration(
-
-                                            // hintText: ,
-                                            // hintStyle: TextStyle(fontSize: 12),
-                                            ),
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Name field Not be empty";
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                      const SizedBox(height: 15.0),
-                                      const Text('Address',
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w700)),
-                                      TextFormField(
-                                        controller: _updateAddressController,
-                                        decoration: const InputDecoration(
-                                          hintText: 'Address',
-                                          hintStyle: TextStyle(fontSize: 12),
-                                        ),
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Address field Not be empty";
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                      const SizedBox(height: 15.0),
-                                      const Text('Phone',
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w700)),
-                                      TextFormField(
-                                        controller: _updatePhoneNoController,
-                                        keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                          hintText: 'Phone',
-                                          hintStyle: TextStyle(fontSize: 12),
-                                        ),
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Phone field Not be empty";
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // =============== ==================== ================
-                        ]),
+            
+                              // =============== ==================== ================
+                            ]),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          );
+                ),
+        ),
+      ),
+    );
   }
 }

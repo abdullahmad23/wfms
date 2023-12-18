@@ -19,7 +19,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isSignInPage = true;
-  bool ischangecolor = false;
+  bool ischangecolor = true;
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _NameController = TextEditingController();
   final TextEditingController _PhNumController = TextEditingController();

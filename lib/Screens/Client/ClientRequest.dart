@@ -155,6 +155,7 @@ class _ClientRequestState extends State<ClientRequest> {
   Widget RequestCard(bool bgColor, String productTitle, String productPrice,
       String btnText, Function() btnMethod) {
     return Container(
+      margin:EdgeInsets.only(top: 15),
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: bgColor ? Colors.red : Colors.blue,

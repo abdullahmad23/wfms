@@ -149,6 +149,7 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
   Widget RequestCard(bool bgColor, String productTitle, String productPrice,
       String btnText, Function() btnMethod) {
     return Container(
+      margin:EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: bgColor ? Colors.red : Colors.blue,
