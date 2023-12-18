@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:path/path.dart' as path;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:waste/Screens/Client/ClientProfile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../Components/AppLogo.dart';
 
@@ -19,9 +20,13 @@ class ClientProfileEdit extends StatefulWidget {
 }
 
 class _ClientProfileEditState extends State<ClientProfileEdit> {
+  String Imgurl = '';
+
   final TextEditingController _updateNameController = TextEditingController();
-  final TextEditingController _updateAddressController = TextEditingController();
-  final TextEditingController _updatePhoneNoController = TextEditingController();
+  final TextEditingController _updateAddressController =
+      TextEditingController();
+  final TextEditingController _updatePhoneNoController =
+      TextEditingController();
   final _formkey = GlobalKey<FormState>();
   Map<String, dynamic> UserDetails = {};
   bool isLoading = true;
@@ -34,13 +39,37 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
 
       if (image == null) return;
 
-      final imageTemp = File(image.path );
+      final imageTemp = File(image.path);
 
       setState(() => this.image = imageTemp);
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
   }
+
+  Future<void> uploadFileToFirebase(File file) async {
+    EasyLoading.show(status: "please wait...");
+    try {
+      Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('ProfileImage/${path.basename(file.path)}');
+      UploadTask uploadTask = storageReference.putFile(file);
+      await uploadTask.whenComplete(() {}).then((value) {
+        value.ref.getDownloadURL().then((value) {
+          EasyLoading.showToast("good");
+          print(value);
+          setState(() {
+            Imgurl = value;
+          });
+        });
+
+        EasyLoading.dismiss();
+      });
+    } catch (e) {
+      print('Error uploading file: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -54,22 +83,30 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   UpdateProfiledetail() {
     EasyLoading.show(status: 'Please Wait...');
     if (_formkey.currentState!.validate()) {
-      try {
-        String UserId = FirebaseAuth.instance.currentUser!.uid;
+      uploadFileToFirebase(image!).then((value) {
+        try {
+          String UserId = FirebaseAuth.instance.currentUser!.uid;
+          print('sending data');
+          print(Imgurl);
+          FirebaseFirestore.instance.collection('users').doc(UserId).update({
+            "name": _updateNameController.text,
+            "phone": _updatePhoneNoController.text,
+            "img": Imgurl,
+          }).then((value) {
+            print('updated');
 
-        FirebaseFirestore.instance.collection('users').doc(UserId).update({
-          "name": _updateNameController.text,
-          "phone": _updatePhoneNoController.text,
-        }).then((value) {
-          print('updated');
-          EasyLoading.dismiss();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ClientProfile()));
-        });
-      } on FirebaseException catch (e) {
-        EasyLoading.showError(e.code);
-      } catch (e) {
-        EasyLoading.showError(e.toString());
-      }
+            EasyLoading.dismiss();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ClientProfile()));
+          });
+        } on FirebaseException catch (e) {
+          EasyLoading.showError(e.code);
+        } catch (e) {
+          EasyLoading.showError(e.toString());
+        }
+      });
+    } else {
+      print('object');
     }
   }
 
@@ -84,16 +121,16 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
           .then((userDetails) {
         setState(() {
           UserDetails = userDetails.data()!;
-
+          Imgurl = UserDetails['img'];
           _updateNameController.text = UserDetails['name'];
           _updatePhoneNoController.text = UserDetails['phone'];
 
           isLoading = false;
         });
       });
-    }on FirebaseException catch(e){
+    } on FirebaseException catch (e) {
       EasyLoading.showError(e.code);
-    }catch(e){
+    } catch (e) {
       EasyLoading.showError(e.toString());
     }
   }
@@ -101,7 +138,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ?  Center(child: CircularProgressIndicator())
+        ? Center(child: CircularProgressIndicator())
         : SafeArea(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -127,7 +164,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xff7FBD50))),
                         ElevatedButton(
-                          onPressed:UpdateProfiledetail,
+                          onPressed: UpdateProfiledetail,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xff7FBD50),
                             shape: RoundedRectangleBorder(
@@ -136,7 +173,8 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                           ),
                           child: const Text(
                             'Save',
-                            style: TextStyle(fontSize: 15.0, color: Colors.white),
+                            style:
+                                TextStyle(fontSize: 15.0, color: Colors.white),
                           ),
                         ),
                       ],
@@ -153,7 +191,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             children: [
                               Container(
                                 height: 200,
-                                color:  Color.fromARGB(255, 255, 255, 255),
+                                color: Color.fromARGB(255, 255, 255, 255),
                               ),
                               Positioned(
                                   bottom: 0,
@@ -167,26 +205,27 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                     width: MediaQuery.of(context).size.width,
                                     height: 150,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
-
                                         ElevatedButton(
-                                          onPressed:pickImage,
+                                          onPressed: pickImage,
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor:  Color(0xff7FBD50),
+                                            backgroundColor: Color(0xff7FBD50),
                                             shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0),
-
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
                                             ),
-
                                           ),
                                           child: Text(
                                             'Edit Image',
-                                            style: TextStyle(fontSize: 15.0, color: Colors.white),
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                color: Colors.white),
                                           ),
                                         ),
-
                                       ],
                                     ),
                                   )),
@@ -203,21 +242,22 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                     height: 20,
                                   )),
                               Positioned(
-                                right: MediaQuery.of(context).size.width / 2 - 50,
-                                child:  SizedBox(
+                                right:
+                                    MediaQuery.of(context).size.width / 2 - 50,
+                                child: SizedBox(
                                   height: 100,
                                   width: 100,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: image != null
                                         ? Image.file(
-                                      image!,
-                                      fit: BoxFit.cover,
-                                    )
+                                            image!,
+                                            fit: BoxFit.cover,
+                                          )
                                         : Image.network(
-                                      UserDetails['img'],
-                                      fit: BoxFit.cover,
-                                    ),
+                                            UserDetails['img'],
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                               ),
@@ -232,7 +272,8 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                 child: Form(
                                   key: _formkey,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         mainAxisAlignment:

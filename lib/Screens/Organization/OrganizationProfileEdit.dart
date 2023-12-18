@@ -182,14 +182,12 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
                                                 BorderRadius.circular(10.0),
                                           ),
                                         ),
-                                        child:
-                                            Text(
-                                              'Edit Image',
-                                              style: TextStyle(
-                                                  fontSize: 15.0,
-                                                  color: Colors.white),
-                                            ),
-
+                                        child: Text(
+                                          'Edit Image',
+                                          style: TextStyle(
+                                              fontSize: 15.0,
+                                              color: Colors.white),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -211,17 +209,17 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
                               child: SizedBox(
                                 height: 100,
                                 width: 100,
-                                child:ClipRRect(
+                                child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: image != null
                                       ? Image.file(
-                                    image!,
-                                    fit: BoxFit.cover,
-                                  )
-                                      :  Image.network(
-                                    UserDetails['img'],
-                                    fit: BoxFit.cover,
-                                  ),
+                                          image!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.network(
+                                          UserDetails['img'],
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ),

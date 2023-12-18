@@ -8,7 +8,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:waste/Screens/Client/ClientProfile.dart';
-
 import '../../Components/AppLogo.dart';
 import 'HotelProfile.dart';
 
