@@ -279,7 +279,7 @@ class _FoodDetailState extends State<FoodDetail> {
                   SizedBox(
                     height: 5,
                   ),
-                  Text("Hazara University ",
+                  Text("${widget.HotelDetails['address']}",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
