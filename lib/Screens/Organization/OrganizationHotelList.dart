@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
 
@@ -9,51 +10,72 @@ class OrganizationHotelList extends StatefulWidget {
 }
 
 class _OrganizationHotelListState extends State<OrganizationHotelList> {
+  List<Map> HotelData = [];
+  bool isLoading = true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getHotel();
+  }
+
+  getHotel() {
+    FirebaseFirestore.instance
+        .collection("users")
+        .where('type', isEqualTo: "Hotel")
+        .get()
+        .then((hotelList) {
+      print(hotelList);
+      for (var hotel in hotelList.docs) {
+        setState(() {
+          HotelData.add(hotel.data());
+        });
+        print("updated");
+        setState(() {
+          isLoading = false;
+        });
+        print("updated");
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          AppLogo(),
-          const SizedBox(
-            height: 5,
-          ),
-          hallcontainer(),
-          const SizedBox(
-            height: 5,
-          ),
-          hallcontainer(),
-          const SizedBox(
-            height: 5,
-          ),
-          hallcontainer(),
-          const SizedBox(
-            height: 5,
-          ),
-          hallcontainer()
-        ],
-      ),
-    ));
+    return isLoading
+        ? Center(child: CircularProgressIndicator())
+        : SafeArea(
+            child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  AppLogo(),
+                  ...HotelData.map((hotel) => hallcontainer("${hotel['name']}",
+                      "${hotel['img']}", "${hotel['address']}", context)),
+                ],
+              ),
+            ),
+          ));
   }
 }
 
-Widget hallcontainer() {
+Widget hallcontainer(
+    String hotelName, String Hotelimg, String hotelAddress, context) {
   return Container(
-    height: 100,
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    margin: const EdgeInsets.only(top: 15),
+    height: MediaQuery.of(context).size.height * 0.20,
+    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    margin: EdgeInsets.only(top: 15),
     decoration: BoxDecoration(
         border: Border.all(), borderRadius: BorderRadius.circular(18)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'AL Hamra Shadi Hall',
+              hotelName,
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
@@ -63,7 +85,7 @@ Widget hallcontainer() {
               height: 8.0,
             ),
             Text(
-              'Karakoeam Highway \nMarghazar Mansehra',
+              hotelAddress,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
@@ -75,7 +97,7 @@ Widget hallcontainer() {
             ),
           ],
         ),
-        SizedBox(child: Image.asset("assets/Mask group.png"))
+        SizedBox(child: Image.network(Hotelimg)),
       ],
     ),
   );

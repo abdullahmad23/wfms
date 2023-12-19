@@ -188,7 +188,7 @@ class _OrganizationProfileState extends State<OrganizationProfile> {
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600),
                                 ),
-                                const Text("Address"),
+                                Text('${UserDetails['address']}'),
                                 SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.2),
