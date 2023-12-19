@@ -47,23 +47,38 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
     }
   }
 
-  Future<void> uploadFileToFirebase(File file) async {
+  uploadFileToFirebase(File file) async {
     EasyLoading.show(status: "please wait...");
     try {
-      Reference storageReference = FirebaseStorage.instance
+      await FirebaseStorage.instance
           .ref()
-          .child('ProfileImage/${path.basename(file.path)}');
-      UploadTask uploadTask = storageReference.putFile(file);
-      await uploadTask.whenComplete(() {}).then((value) {
+          .child('ProfileImage/${path.basename(file.path)}')
+          .putFile(file)
+          .whenComplete(() {})
+          .then((value) {
         value.ref.getDownloadURL().then((value) {
-          EasyLoading.showToast("good");
-          print(value);
-          setState(() {
-            Imgurl = value;
-          });
-        });
+          try {
+            String UserId = FirebaseAuth.instance.currentUser!.uid;
+            FirebaseFirestore.instance.collection('users').doc(UserId).update({
+              "name": _updateNameController.text,
+              "phone": _updatePhoneNoController.text,
+              "img": value,
+              "address": _updateAddressController.text,
+            }).then((value) {
+              print('updated');
 
-        EasyLoading.dismiss();
+              EasyLoading.dismiss();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ClientProfile()));
+            });
+          } on FirebaseException catch (e) {
+            EasyLoading.showError(e.code);
+          } catch (e) {
+            EasyLoading.showError(e.toString());
+          }
+        });
       });
     } catch (e) {
       print('Error uploading file: $e');
@@ -81,8 +96,11 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   }
 
   UpdateProfiledetail() {
-    EasyLoading.show(status: 'Please Wait...');
+    EasyLoading.dismiss();
+
     if (_formkey.currentState!.validate()) {
+      EasyLoading.show(status: 'Please Wait...');
+
       uploadFileToFirebase(image!).then((value) {
         try {
           String UserId = FirebaseAuth.instance.currentUser!.uid;
@@ -125,6 +143,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
           Imgurl = UserDetails['img'];
           _updateNameController.text = UserDetails['name'];
           _updatePhoneNoController.text = UserDetails['phone'];
+          _updateAddressController.text = userDetails['address'];
 
           isLoading = false;
         });

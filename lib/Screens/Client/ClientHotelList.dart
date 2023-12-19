@@ -52,8 +52,8 @@ class _ClientHotelListState extends State<ClientHotelList> {
               child: Column(
                 children: [
                   AppLogo(),
-                  ...HotelData.map((hotel) => hallcontainer(
-                      "${hotel['name']}", "${hotel['img']}", context)),
+                  ...HotelData.map((hotel) => hallcontainer("${hotel['name']}",
+                      "${hotel['img']}", "${hotel['address']}", context)),
                 ],
               ),
             ),
@@ -61,7 +61,8 @@ class _ClientHotelListState extends State<ClientHotelList> {
   }
 }
 
-Widget hallcontainer(String hotelName, String Hotelimg, context) {
+Widget hallcontainer(
+    String hotelName, String Hotelimg, String hotelAddress, context) {
   return Container(
     height: MediaQuery.of(context).size.height * 0.20,
     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -85,7 +86,7 @@ Widget hallcontainer(String hotelName, String Hotelimg, context) {
               height: 8.0,
             ),
             Text(
-              'Karakoeam Highway \nMarghazar Mansehra',
+              hotelAddress,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,

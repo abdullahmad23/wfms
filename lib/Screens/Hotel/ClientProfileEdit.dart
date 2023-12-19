@@ -63,6 +63,7 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
         FirebaseFirestore.instance.collection('users').doc(UserId).update({
           "name": _updateNameController.text,
           "phone": _updatePhoneNoController.text,
+          "address": _updateAddressController.text,
         }).then((value) {
           print('updated');
           EasyLoading.dismiss();
@@ -91,6 +92,7 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
 
           _updateNameController.text = UserDetails['name'];
           _updatePhoneNoController.text = UserDetails['phone'];
+          _updateAddressController.text = UserDetails['address'];
 
           isLoading = false;
         });
@@ -141,8 +143,8 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                               ),
                               child: const Text(
                                 'Save',
-                                style:
-                                    TextStyle(fontSize: 15.0, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 15.0, color: Colors.white),
                               ),
                             ),
                           ],
@@ -153,11 +155,9 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                       ),
                       Container(
                         child: Column(
-                          
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Stack(
-                                
                                 children: [
                                   Container(
                                     height: 200,
@@ -172,7 +172,8 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                               topRight: Radius.circular(20)),
                                           color: Color(0xff1D331B),
                                         ),
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height: 150,
                                         child: Column(
                                           mainAxisAlignment:
@@ -183,10 +184,12 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                             ElevatedButton(
                                               onPressed: pickImage,
                                               style: ElevatedButton.styleFrom(
-                                                backgroundColor: Color(0xff7FBD50),
+                                                backgroundColor:
+                                                    Color(0xff7FBD50),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(10.0),
+                                                      BorderRadius.circular(
+                                                          10.0),
                                                 ),
                                               ),
                                               child: Text(
@@ -206,19 +209,23 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(20),
                                               topRight: Radius.circular(20)),
-                                          color: Color.fromARGB(255, 255, 255, 255),
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
                                         ),
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height: 20,
                                       )),
                                   Positioned(
                                     right:
-                                        MediaQuery.of(context).size.width / 2 - 50,
+                                        MediaQuery.of(context).size.width / 2 -
+                                            50,
                                     child: SizedBox(
                                       height: 100,
                                       width: 100,
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                         child: image != null
                                             ? Image.file(
                                                 image!,
@@ -235,7 +242,7 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                               ),
                               // ================= ============== =====================
                               Padding(
-                                padding:  EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(8.0),
                                 child: Container(
                                   child: Form(
                                     key: _formkey,
@@ -252,8 +259,9 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w700,
-                                                  fontFamily: GoogleFonts.inter()
-                                                      .fontFamily),
+                                                  fontFamily:
+                                                      GoogleFonts.inter()
+                                                          .fontFamily),
                                             ),
                                           ],
                                         ),
@@ -267,12 +275,12 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                         TextFormField(
                                           controller: _updateNameController,
                                           decoration: const InputDecoration(
-                                    
+
                                               // hintText: ,
                                               // hintStyle: TextStyle(fontSize: 12),
                                               ),
-                                          autovalidateMode:
-                                              AutovalidateMode.onUserInteraction,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Name field Not be empty";
@@ -291,8 +299,8 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                             hintText: 'Address',
                                             hintStyle: TextStyle(fontSize: 12),
                                           ),
-                                          autovalidateMode:
-                                              AutovalidateMode.onUserInteraction,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Address field Not be empty";
@@ -312,8 +320,8 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                             hintText: 'Phone',
                                             hintStyle: TextStyle(fontSize: 12),
                                           ),
-                                          autovalidateMode:
-                                              AutovalidateMode.onUserInteraction,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Phone field Not be empty";
@@ -326,7 +334,7 @@ class _HotelProfileEditState extends State<HotelProfileEdit> {
                                   ),
                                 ),
                               ),
-            
+
                               // =============== ==================== ================
                             ]),
                       ),

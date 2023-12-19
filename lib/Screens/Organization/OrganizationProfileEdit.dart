@@ -62,6 +62,7 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
         FirebaseFirestore.instance.collection('users').doc(UserId).update({
           "name": _updateNameController.text,
           "phone": _updatePhoneNoController.text,
+          "address": _updateAddressController.text,
         }).then((value) {
           print('updated');
           EasyLoading.dismiss();
@@ -90,6 +91,7 @@ class _OrganizationProfileEditState extends State<OrganizationProfileEdit> {
 
           _updateNameController.text = UserDetails['name'];
           _updatePhoneNoController.text = UserDetails['phone'];
+          _updateAddressController.text = UserDetails['address'];
 
           isLoading = false;
         });

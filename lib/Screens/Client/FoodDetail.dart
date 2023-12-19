@@ -279,8 +279,8 @@ class _FoodDetailState extends State<FoodDetail> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text("Hazara University ",
-                      style: TextStyle(
+                  Text("${widget.HotelDetails['address']}",
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       )),

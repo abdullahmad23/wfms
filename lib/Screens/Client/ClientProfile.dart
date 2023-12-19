@@ -153,10 +153,10 @@ class _ClientProfileState extends State<ClientProfile> {
                               child: Container(
                                 height: 100,
                                 width: 100,
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(UserDetails["img"]),
-                                ),
+                                // child: CircleAvatar(
+                                // backgroundImage:
+                                // NetworkImage(UserDetails["img"]),
+                                // ),
                               ),
                             ),
                           ],

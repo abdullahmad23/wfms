@@ -73,7 +73,7 @@ class _ProductCardState extends State<ProductCard> {
                   height: 8.0,
                 ),
                 Text(
-                  'Bajna Moterway \nRoad Shinkiari',
+                  "${HotelData['address']}",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
