@@ -182,7 +182,7 @@ class _ClientProfileState extends State<ClientProfile> {
                                 style: TextStyle(
                                     fontSize: 22, fontWeight: FontWeight.w600),
                               ),
-                              Text("Address"),
+                              Text("${UserDetails['address']}"),
                               SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * 0.2),

@@ -92,6 +92,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
             "name": _updateNameController.text,
             "phone": _updatePhoneNoController.text,
             "img": Imgurl,
+            "address": _updateAddressController.text,
           }).then((value) {
             print('updated');
 

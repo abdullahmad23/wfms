@@ -111,6 +111,7 @@ class _SignInState extends State<SignIn> {
             "name": _NameController.text,
             "email": _EmailController.text,
             "phone": _PhNumController.text,
+            "address": 'UnKonwn',
             "type": widget.title,
             "varified": false,
             "img":
@@ -192,7 +193,7 @@ class _SignInState extends State<SignIn> {
                             onPressed: () {
                               setState(() {
                                 isSignInPage = true;
-                                ischangecolor =true;
+                                ischangecolor = true;
                               });
                             },
                             child: Text(
@@ -203,8 +204,7 @@ class _SignInState extends State<SignIn> {
                                   fontFamily: GoogleFonts.inter().fontFamily,
                                   color: ischangecolor
                                       ? Colors.white
-                                      : Colors.grey
-                                      ),
+                                      : Colors.grey),
                             ),
                           ),
                           // go to sign up
@@ -215,7 +215,7 @@ class _SignInState extends State<SignIn> {
                             onPressed: () {
                               setState(() {
                                 isSignInPage = false;
-                                ischangecolor =false;
+                                ischangecolor = false;
                               });
                             },
                             child: Text(
@@ -253,7 +253,8 @@ class _SignInState extends State<SignIn> {
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Text(
                             'Client',
@@ -272,12 +273,13 @@ class _SignInState extends State<SignIn> {
                               ),
                             ],
                           ),
-                      
+
                           TextFormField(
                             controller: _EmailController,
                             decoration: const InputDecoration(
                                 hintText: "Enter your Email"),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Email can't be Empty";
@@ -302,7 +304,7 @@ class _SignInState extends State<SignIn> {
                               ),
                             ],
                           ),
-                      
+
                           TextFormField(
                             controller: _PassWordController,
                             decoration: const InputDecoration(
@@ -313,7 +315,8 @@ class _SignInState extends State<SignIn> {
                                 size: 20,
                               ),
                             ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "please fill the field";
@@ -332,7 +335,7 @@ class _SignInState extends State<SignIn> {
                           const SizedBox(
                             height: 20,
                           ),
-                      
+
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
