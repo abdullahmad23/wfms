@@ -19,8 +19,8 @@ class _FoodDetailState extends State<FoodDetail> {
 
   late int total = int.parse(price) * int.parse(qty);
 
-  TextEditingController _quantityController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
 
   void submitOrder() {
     print('pressed');
@@ -40,14 +40,14 @@ class _FoodDetailState extends State<FoodDetail> {
         "Qty": _quantityController.text,
         "creted_by": UserId,
         "CustomerName": UserDetails['name'],
-        "Status": false,
+        "Status": "pending",
         "Dismiss": false,
         "FoodTitle": widget.foodData['Title'],
         "HotelId": widget.foodData['Created_By'],
-      }).then((value) => null);
+      }).then((value) {});
     } on FirebaseException catch (e) {
       print(e);
-    } catch (e) {}
+    }
   }
 
   ShowOfferModel() {
@@ -61,26 +61,26 @@ class _FoodDetailState extends State<FoodDetail> {
         return Column(
           children: [
             Text("${widget.foodData['Title']}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                 )),
-            Divider(
+            const Divider(
               color: Colors.black,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Quantity",
+                const Text("Quantity",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 TextField(
@@ -91,22 +91,22 @@ class _FoodDetailState extends State<FoodDetail> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
                           20), // Adjust the border radius as needed
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.black, // Border color
                         width: 2.0, // Border width
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text("Price",
+                const Text("Price",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextField(
@@ -117,14 +117,14 @@ class _FoodDetailState extends State<FoodDetail> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
                           20), // Adjust the border radius as needed
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.black, // Border color
                         width: 2.0, // Border width
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ElevatedButton(
@@ -134,10 +134,10 @@ class _FoodDetailState extends State<FoodDetail> {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25))),
                       backgroundColor:
-                          MaterialStateProperty.all(Color(0xff1D331B)),
+                          MaterialStateProperty.all(const Color(0xff1D331B)),
                     ),
                     onPressed: submitOrder,
-                    child: Text(
+                    child: const Text(
                       "Submit",
                       style: TextStyle(color: Colors.white),
                     ))
@@ -155,11 +155,11 @@ class _FoodDetailState extends State<FoodDetail> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios_new,
           color: Color(0xff7FBD50),
         ),
-        title: Text(
+        title: const Text(
           "Food Details",
           style: TextStyle(
               fontSize: 24,
@@ -181,7 +181,7 @@ class _FoodDetailState extends State<FoodDetail> {
                     fit: BoxFit.fill),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -194,7 +194,7 @@ class _FoodDetailState extends State<FoodDetail> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("${widget.foodData['Title']}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
                           )),
@@ -202,17 +202,17 @@ class _FoodDetailState extends State<FoodDetail> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text("Amount: ${widget.foodData['Qty']} KG",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               )),
                           Text("Price: PKR ${widget.foodData['Price']}/KG",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               )),
                           Text("Total: PKR $total/$qty KG",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               )),
@@ -220,31 +220,31 @@ class _FoodDetailState extends State<FoodDetail> {
                       )
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     color: Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.date_range,
                         color: Colors.green,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Expiry Date",
+                          const Text("Expiry Date",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               )),
                           Text("${widget.foodData['Exp']}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               )),
@@ -252,42 +252,42 @@ class _FoodDetailState extends State<FoodDetail> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Text("Hotel Name",
+                  const Text("Hotel Name",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text("${widget.HotelDetails['name']}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text("Address ",
+                  const Text("Address ",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text("${widget.HotelDetails['address']}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       )),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Center(
@@ -298,10 +298,10 @@ class _FoodDetailState extends State<FoodDetail> {
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25))),
                     backgroundColor:
-                        MaterialStateProperty.all(Color(0xff1D331B)),
+                        MaterialStateProperty.all(const Color(0xff1D331B)),
                   ),
                   onPressed: ShowOfferModel,
-                  child: Text("Send Offer",
+                  child: const Text("Send Offer",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,

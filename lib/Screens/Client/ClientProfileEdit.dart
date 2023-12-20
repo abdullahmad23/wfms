@@ -69,8 +69,10 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
               print('updated');
 
               EasyLoading.dismiss();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ClientProfile()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ClientProfile()));
             });
           } on FirebaseException catch (e) {
             EasyLoading.showError(e.code);
@@ -101,7 +103,27 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
       EasyLoading.show(status: 'Please Wait...');
 
       uploadFileToFirebase(image!).then((value) {
-        print(value);
+        try {
+          String UserId = FirebaseAuth.instance.currentUser!.uid;
+          print('sending data');
+          print(Imgurl);
+          FirebaseFirestore.instance.collection('users').doc(UserId).update({
+            "name": _updateNameController.text,
+            "phone": _updatePhoneNoController.text,
+            "img": Imgurl,
+            "address": _updateAddressController.text,
+          }).then((value) {
+            print('updated');
+
+            EasyLoading.dismiss();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ClientProfile()));
+          });
+        } on FirebaseException catch (e) {
+          EasyLoading.showError(e.code);
+        } catch (e) {
+          EasyLoading.showError(e.toString());
+        }
       });
     } else {
       print('object');
@@ -137,14 +159,14 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : SafeArea(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(right: 6.0),
+                    padding: const EdgeInsets.only(right: 6.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -190,7 +212,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             children: [
                               Container(
                                 height: 200,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                               ),
                               Positioned(
                                   bottom: 0,
@@ -212,13 +234,14 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                         ElevatedButton(
                                           onPressed: pickImage,
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xff7FBD50),
+                                            backgroundColor:
+                                                const Color(0xff7FBD50),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             'Edit Image',
                                             style: TextStyle(
                                                 fontSize: 15.0,
