@@ -57,6 +57,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
           .whenComplete(() {})
           .then((value) {
         value.ref.getDownloadURL().then((value) {
+          print(value);
           try {
             String UserId = FirebaseAuth.instance.currentUser!.uid;
             FirebaseFirestore.instance.collection('users').doc(UserId).update({

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:waste/Components/GoogleMap.dart';
 
 import '../../Components/AppLogo.dart';
 
@@ -101,6 +102,12 @@ class _ClientRequestState extends State<ClientRequest> {
                             onPressed: () {
                               setState(() {
                                 flag = false;
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const GoogleMap()));
                               });
                             },
                             child: Text(
@@ -139,7 +146,7 @@ class _ClientRequestState extends State<ClientRequest> {
                       ]),
                     ),
                     Visibility(
-                      visible: flag,
+                      visible: !flag,
                       child: Container(
                         width: double.infinity,
                         color: Colors.green,
@@ -155,7 +162,7 @@ class _ClientRequestState extends State<ClientRequest> {
   Widget RequestCard(bool bgColor, String productTitle, String productPrice,
       String btnText, Function() btnMethod) {
     return Container(
-      margin:EdgeInsets.only(top: 15),
+      margin: EdgeInsets.only(top: 15),
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: bgColor ? Colors.red : Colors.blue,

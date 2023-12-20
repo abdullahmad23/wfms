@@ -15,7 +15,6 @@ class _ClientHotelListState extends State<ClientHotelList> {
   bool isLoading = true;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getHotel();
   }
