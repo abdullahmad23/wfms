@@ -215,18 +215,20 @@ class _ClientRequestState extends State<ClientRequest> {
                           color: Colors.white)),
                 ],
               ),
-              Visibility(
-                  visible: pending,
-                  child: requestCardButton('pending', () => null)),
 
-              Visibility(
-                  visible: accepted,
-                  child: requestCardButton('accepted', () => null)),
-
-              Visibility(
-                  visible: rejected,
-                  child: requestCardButton('rejected', () => null)),
-
+              Column(
+                children: [
+                  Visibility(
+                      visible: pending,
+                      child: requestCardButton('pending', () => null)),
+                  Visibility(
+                      visible: accepted,
+                      child: requestCardButton('accepted', () => null)),
+                  Visibility(
+                      visible: rejected,
+                      child: requestCardButton('rejected', () => null)),
+                ],
+              ),
               // ElevatedButton(
               //   onPressed: () {},
               //   style: ElevatedButton.styleFrom(
