@@ -46,7 +46,7 @@ class _HotelHomeState extends State<HotelHome> {
     }
   }
 
-  TextEditingController _searchBarController = TextEditingController();
+  final TextEditingController _searchBarController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +96,10 @@ class _HotelHomeState extends State<HotelHome> {
 
   Widget foodcontainer(Map food) {
     String title = food['Title'];
-    String trimmedString = "";
     if (title.length >= 10) {
-      trimmedString = title.substring(0, 15) + "......";
+      String trimmedString = title.substring(0, 10);
     } else {
-      trimmedString = title;
+      print(title);
     }
 // String trimmedString =title.substring(0, 10);
     // String trimTitle=title..characters.take(7);
@@ -124,8 +123,8 @@ class _HotelHomeState extends State<HotelHome> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${trimmedString}",
-                  style: TextStyle(
+                  "${food[title]}",
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                       color: Colors.black),
@@ -135,7 +134,7 @@ class _HotelHomeState extends State<HotelHome> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Quantity ',
                           style: TextStyle(
                               fontSize: 14,
@@ -145,13 +144,13 @@ class _HotelHomeState extends State<HotelHome> {
                         Text('  ${food['Qty']} kg'),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'New',
                           style: TextStyle(
                               fontSize: 14,

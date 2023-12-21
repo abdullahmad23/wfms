@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:waste/Components/AppLogo.dart';
 import 'package:waste/Screens/Admin/userdetailsfile.dart';
 
 class AdminHome extends StatefulWidget {
@@ -42,15 +43,24 @@ class _AdminHomeState extends State<AdminHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: _Users.map(
-          (user) => Userdetails(context, "${user['name']}", "${user['type']}",
-              "${user['phone']}", "${user['id']}"),
-        ).toList(),
-      ),
-    ));
+    return SafeArea(
+      child: Scaffold(
+          body: SingleChildScrollView(
+        child: Column(children: [
+          const SizedBox(
+            height: 15,
+          ),
+          AppLogo(),
+          const SizedBox(
+            height: 15,
+          ),
+          ..._Users.map(
+            (user) => Userdetails(context, "${user['name']}", "${user['type']}",
+                "${user['phone']}", "${user['id']}"),
+          ).toList(),
+        ]),
+      )),
+    );
   }
 }
 
@@ -59,7 +69,7 @@ Widget Userdetails(context, name, type, address, id) {
   // String rname;
   // String address;
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(10),
     child: InkWell(
       onTap: () {
         Navigator.push(
@@ -72,7 +82,9 @@ Widget Userdetails(context, name, type, address, id) {
             borderRadius: const BorderRadius.all(
                 Radius.circular(15.0) //                 <--- border radius here
                 ),
-            border: Border.all(color: Colors.blueAccent)),
+            border: Border.all(
+              color: const Color(0xff1b2e0d),
+            )),
         padding: const EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 1 / 9,
@@ -92,7 +104,11 @@ Widget Userdetails(context, name, type, address, id) {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(name),
+                Text(
+                  name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 17),
+                ),
                 Text(type),
                 Text(address),
               ],
