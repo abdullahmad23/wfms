@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
+import 'package:waste/Components/GoogleMap.dart';
 import 'package:waste/Components/ProductCard.dart';
 
 class ClientHome extends StatefulWidget {
@@ -66,6 +67,7 @@ class _ClientHomeState extends State<ClientHome> {
               child: TextField(
                 controller: searchBarText,
                 keyboardType: TextInputType.text,
+                readOnly: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),

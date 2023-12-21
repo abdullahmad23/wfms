@@ -47,23 +47,39 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
     }
   }
 
-  Future<void> uploadFileToFirebase(File file) async {
+  uploadFileToFirebase(File file) async {
     EasyLoading.show(status: "please wait...");
     try {
-      Reference storageReference = FirebaseStorage.instance
+      await FirebaseStorage.instance
           .ref()
-          .child('ProfileImage/${path.basename(file.path)}');
-      UploadTask uploadTask = storageReference.putFile(file);
-      await uploadTask.whenComplete(() {}).then((value) {
+          .child('ProfileImage/${path.basename(file.path)}')
+          .putFile(file)
+          .whenComplete(() {})
+          .then((value) {
         value.ref.getDownloadURL().then((value) {
-          EasyLoading.showToast("good");
           print(value);
-          setState(() {
-            Imgurl = value;
-          });
-        });
+          try {
+            String UserId = FirebaseAuth.instance.currentUser!.uid;
+            FirebaseFirestore.instance.collection('users').doc(UserId).update({
+              "name": _updateNameController.text,
+              "phone": _updatePhoneNoController.text,
+              "img": value,
+              "address": _updateAddressController.text,
+            }).then((value) {
+              print('updated');
 
-        EasyLoading.dismiss();
+              EasyLoading.dismiss();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ClientProfile()));
+            });
+          } on FirebaseException catch (e) {
+            EasyLoading.showError(e.code);
+          } catch (e) {
+            EasyLoading.showError(e.toString());
+          }
+        });
       });
     } catch (e) {
       print('Error uploading file: $e');
@@ -81,8 +97,11 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   }
 
   UpdateProfiledetail() {
-    EasyLoading.show(status: 'Please Wait...');
+    EasyLoading.dismiss();
+
     if (_formkey.currentState!.validate()) {
+      EasyLoading.show(status: 'Please Wait...');
+
       uploadFileToFirebase(image!).then((value) {
         try {
           String UserId = FirebaseAuth.instance.currentUser!.uid;
@@ -98,7 +117,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
 
             EasyLoading.dismiss();
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ClientProfile()));
+                MaterialPageRoute(builder: (context) => const ClientProfile()));
           });
         } on FirebaseException catch (e) {
           EasyLoading.showError(e.code);
@@ -125,6 +144,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
           Imgurl = UserDetails['img'];
           _updateNameController.text = UserDetails['name'];
           _updatePhoneNoController.text = UserDetails['phone'];
+          _updateAddressController.text = userDetails['address'];
 
           isLoading = false;
         });
@@ -139,14 +159,14 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : SafeArea(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(right: 6.0),
+                    padding: const EdgeInsets.only(right: 6.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -192,7 +212,7 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                             children: [
                               Container(
                                 height: 200,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                               ),
                               Positioned(
                                   bottom: 0,
@@ -214,13 +234,14 @@ class _ClientProfileEditState extends State<ClientProfileEdit> {
                                         ElevatedButton(
                                           onPressed: pickImage,
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xff7FBD50),
+                                            backgroundColor:
+                                                const Color(0xff7FBD50),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
                                           ),
-                                          child: Text(
+                                          child: const Text(
                                             'Edit Image',
                                             style: TextStyle(
                                                 fontSize: 15.0,
