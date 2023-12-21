@@ -56,7 +56,7 @@ class _OrganizationMainState extends State<OrganizationMain> {
           Icon(Icons.home, size: 30, color: Colors.white),
           Icon(Icons.request_quote, size: 30, color: Colors.white),
           Icon(Icons.restaurant_sharp, size: 30, color: Colors.white),
-          Icon(Icons.account_balance_rounded, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
         ],
         color: const Color(0xff1b2e0d),
         buttonBackgroundColor: const Color(0xff7FBD50),

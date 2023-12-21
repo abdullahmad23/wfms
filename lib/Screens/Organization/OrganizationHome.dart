@@ -172,7 +172,10 @@ Widget foodcontainer() {
             ),
           ],
         ),
-        SizedBox(child: Image.asset("assets/Mask group.png"))
+        SizedBox(
+            height: 120.0,
+            width: 120.0,
+            child: Image.asset("assets/Mask group.png"))
       ],
     ),
   );
