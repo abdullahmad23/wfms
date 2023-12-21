@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:waste/Components/AppLogo.dart';
+import 'package:waste/Components/RequestCardButton.dart';
 
 class HotelOrderRequests extends StatefulWidget {
   const HotelOrderRequests({super.key});
@@ -12,6 +15,8 @@ class HotelOrderRequests extends StatefulWidget {
 
 class _HotelOrderRequestsState extends State<HotelOrderRequests> {
   bool flag = true;
+
+  var documentId;
 
   List<Map<String, dynamic>> allRequest = [];
 
@@ -30,11 +35,20 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
         .get()
         .then((request) {
       for (var req in request.docs) {
+        Map<String, dynamic> temp = req.data();
+        temp['id'] = req.id;
         setState(() {
-          allRequest.add(req.data());
+          allRequest.add(temp);
         });
       }
     });
+  }
+
+  void setRequestStatus(String Did, String status) {
+    FirebaseFirestore.instance
+        .collection('offers')
+        .doc(Did)
+        .update({'status': status});
   }
 
   @override
@@ -124,11 +138,9 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
                 child: Column(
                   children: [
                     ...allRequest.map((allreq) => RequestCard(
-                        allreq['Status'],
                         "${allreq['FoodTitle']}",
                         "${allreq['Price']} Pkr/${allreq['Qty']} Kg",
-                        "View",
-                        () => null))
+                        allreq['id']))
                   ],
                 ),
               ),
@@ -146,13 +158,16 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
     );
   }
 
-  Widget RequestCard(bool bgColor, String productTitle, String productPrice,
-      String btnText, Function() btnMethod) {
+  Widget RequestCard(
+    String productTitle,
+    String productPrice,
+    String id,
+  ) {
     return Container(
-      margin:EdgeInsets.only(top: 15),
+      margin: EdgeInsets.only(top: 15),
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: bgColor ? Colors.red : Colors.blue,
+        color: Colors.blue,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -174,12 +189,18 @@ class _HotelOrderRequestsState extends State<HotelOrderRequests> {
                       color: Colors.white)),
             ],
           ),
-          ElevatedButton(
-            onPressed: btnMethod,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xffFFFFFF).withOpacity(0.5),
-            ),
-            child: Text(btnText),
+          Column(
+            children: [
+              requestCardButton("Accept", () {
+                setRequestStatus(id, 'accepted');
+              }),
+              SizedBox(
+                height: 2.0,
+              ),
+              requestCardButton("Reject", () {
+                setRequestStatus(id, 'rejected');
+              }),
+            ],
           ),
         ],
       ),
