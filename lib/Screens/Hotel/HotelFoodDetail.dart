@@ -52,16 +52,15 @@ class _HotelFoodDetailState extends State<HotelFoodDetail> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading:  IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back_ios,
-                                  size: 18,
-                                  color: Color(0xff7FBD50),
-                                )),
-       
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: Color(0xff7FBD50),
+            )),
         title: Text(
           "Food Details",
           style: TextStyle(
@@ -95,11 +94,13 @@ class _HotelFoodDetailState extends State<HotelFoodDetail> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${widget.foodDetails['Title']}",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        )),
+                    Flexible(
+                      child: Text("${widget.foodDetails['Title']}",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          )),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
