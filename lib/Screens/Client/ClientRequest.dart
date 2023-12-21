@@ -204,9 +204,10 @@ class _ClientRequestState extends State<ClientRequest> {
                 children: [
                   Text(productTitle,
                       style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600)),
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      )),
                   const SizedBox(height: 3.0),
                   Text(productPrice,
                       style: const TextStyle(
@@ -223,7 +224,7 @@ class _ClientRequestState extends State<ClientRequest> {
                       child: requestCardButton('pending', () => null)),
                   Visibility(
                       visible: accepted,
-                      child: requestCardButton('accepted', () => null)),
+                      child: requestCardButton('PayNow', () => null)),
                   Visibility(
                       visible: rejected,
                       child: requestCardButton('rejected', () => null)),
