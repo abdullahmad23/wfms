@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:waste/Components/PaymentScreen.dart';
 import 'package:waste/Components/RequestCardButton.dart';
 import 'package:waste/Components/GoogleMap.dart';
 
@@ -173,11 +174,11 @@ class _ClientRequestState extends State<ClientRequest> {
       setState(() {
         pending = true;
       });
-    } else if (requestStatus == 'rejected') {
+    } else if (requestStatus == 'accepted') {
       setState(() {
         accepted = true;
       });
-    } else if (requestStatus == 'accepted') {
+    } else if (requestStatus == 'rejected') {
       setState(() {
         rejected = true;
       });
@@ -223,8 +224,17 @@ class _ClientRequestState extends State<ClientRequest> {
                       visible: pending,
                       child: requestCardButton('pending', () => null)),
                   Visibility(
-                      visible: accepted,
-                      child: requestCardButton('PayNow', () => null)),
+                    visible: accepted,
+                    child: requestCardButton('PayNow', () {
+                      print("pressed..........");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => PaymentScreen()),
+                        ),
+                      );
+                    }),
+                  ),
                   Visibility(
                       visible: rejected,
                       child: requestCardButton('rejected', () => null)),
