@@ -13,8 +13,8 @@ class ImgButton extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.all(0),
-        height: 120,
-        width: 120,
+        height: 125,
+        width: 125,
         decoration: BoxDecoration(
             border: Border.all(
               color: Colors.black,
